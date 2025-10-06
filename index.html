@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOULBOX</title>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.21.0",
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js",
+    "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.3.0/"
+  }
+}
+</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // Allows for light/dark mode toggling
+      theme: {
+        extend: {
+          colors: {
+            // New "Calm & Professional" Palette
+            'brand-dark': '#0F172A',       // Deep navy for dark mode background
+            'brand-secondary': '#1E293B',   // Dark slate for cards in dark mode
+            'brand-tertiary': '#334155',    // Lighter slate for borders/dividers in dark mode
+            'brand-accent': '#38BDF8',      // Sky blue for highlights, buttons, and active states
+            'brand-light-bg': '#F8FAFC',    // Very light gray (off-white) for light mode background
+            'brand-light-card': '#FFFFFF',  // Pure white for cards in light mode
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    /* A more polished scrollbar for better aesthetics */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1; /* light gray */
+        border-radius: 10px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+        background: #475569; /* darker gray */
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+    .dark ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+  </style>
+</head>
+<body class="h-full bg-brand-light-bg dark:bg-brand-dark antialiased">
+  <div id="root" class="h-full"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

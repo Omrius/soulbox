@@ -1,0 +1,7 @@
+{
+  "name": "SOULBOX",
+  "description": "SOULBOX is a web application to securely manage your digital legacy, including sealed messages, voice clones, and communication channels, based on the 'Résumé express' concept.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
