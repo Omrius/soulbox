@@ -1,4 +1,5 @@
 
+
 // components/Dashboard.tsx
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -27,6 +28,16 @@ const Dashboard: React.FC = () => {
         <span className="font-semibold text-brand-accent">{children}</span>
     );
 
+    const renderStep = (key: string) => {
+        const text = t(key); // Get the raw string with tags
+        if (typeof text !== 'string' || !text.includes('<1>')) {
+            return text;
+        }
+        const parts = text.split(/<1>|<\/1>/);
+        // The split will result in [before, content, after]
+        return <>{parts[0]}<NextStep>{parts[1]}</NextStep>{parts[2] || ''}</>;
+    };
+
     return (
         <div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('dashboard.welcome', { name: cloneUser.name })}</h1>
@@ -43,10 +54,13 @@ const Dashboard: React.FC = () => {
             <div className="mt-8 bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('dashboard.nextSteps')}</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                    <li>{t('dashboard.step1', { 1: (text) => <NextStep>{text}</NextStep> })}</li>
-                    <li>{t('dashboard.step2', { 1: (text) => <NextStep>{text}</NextStep> })}</li>
-                    <li>{t('dashboard.step3', { 1: (text) => <NextStep>{text}</NextStep> })}</li>
-                    <li>{t('dashboard.step4', { 1: (text) => <NextStep>{text}</NextStep> })}</li>
+                    {/* FIX: The t() function's component interpolation is not working correctly.
+                        This was causing a TypeScript error and a visual bug (text not styled).
+                        The fix is to get the raw translation string and manually insert the component. */}
+                    <li>{renderStep('dashboard.step1')}</li>
+                    <li>{renderStep('dashboard.step2')}</li>
+                    <li>{renderStep('dashboard.step3')}</li>
+                    <li>{renderStep('dashboard.step4')}</li>
                 </ul>
             </div>
         </div>
