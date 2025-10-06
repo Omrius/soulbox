@@ -24,7 +24,8 @@ const Dashboard: React.FC = () => {
     const { t } = useI18n();
     const cloneUser = user as CloneUser;
 
-    const NextStep = ({ children }: { children: React.ReactNode }) => (
+    // FIX: The `children` prop is made optional to prevent crashes if a translation string is malformed.
+    const NextStep = ({ children }: { children?: React.ReactNode }) => (
         <span className="font-semibold text-brand-accent">{children}</span>
     );
 
