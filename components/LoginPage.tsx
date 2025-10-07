@@ -59,13 +59,6 @@ const LoginPage: React.FC<{ initialView: View }> = ({ initialView }) => {
         setCurrentBgIndex(prevIndex => (prevIndex + 1) % backgroundImages.length);
     };
 
-    const handleTitleClick = () => {
-        if (!isLoginVisible) {
-            changeBackground();
-        }
-        setIsLoginVisible(!isLoginVisible);
-    };
-
     const handleViewChange = (view: View) => {
         if (view !== activeView) {
             changeBackground();
@@ -243,8 +236,7 @@ const LoginPage: React.FC<{ initialView: View }> = ({ initialView }) => {
             
             <div className="relative z-20 flex flex-col items-center justify-center h-full w-full">
                 <a 
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); handleTitleClick(); }} 
+                  href="/"
                   className="text-6xl font-bold text-white mb-8 drop-shadow-lg cursor-pointer transition-transform hover:scale-105"
                 >
                     SoulBox

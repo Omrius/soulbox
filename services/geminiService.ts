@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { SealedItem, TrainingData, TrainingDocument, PublicCloneInfo } from '../types.ts';
+import { uploadFileToDrive } from './googleDriveService.ts';
 
 // Per guidelines, initialize the SDK and assume process.env.API_KEY is available.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
@@ -189,13 +190,19 @@ export const deleteTrainingDocument = async (docId: string): Promise<void> => {
 };
 
 export const saveTrainingToDrive = async (data: TrainingData): Promise<void> => {
-    console.log("Saving training data to Google Drive (simulated):", data);
-    return new Promise(resolve => {
-        setTimeout(() => {
-            console.log("Simulated save to Google Drive complete.");
-            resolve();
-        }, 1500); // Simulate network delay
-    });
+    console.log("Saving training data to Google Drive...");
+    try {
+        const jsonData = JSON.stringify(data, null, 2);
+        const dataBlob = new Blob([jsonData], { type: 'application/json' });
+        
+        const result = await uploadFileToDrive(dataBlob, `soulbox_training_backup_${new Date().toISOString()}.json`);
+        
+        console.log("Successfully saved training data to Google Drive.", result);
+    } catch (error) {
+        console.error("Failed to save training data to Google Drive:", error);
+        // In a real app, you might want to show a notification to the user
+        throw error;
+    }
 };
 
 const buildSystemInstruction = (context: TrainingData): string => {

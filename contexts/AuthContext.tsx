@@ -30,6 +30,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        // Firebase auth is temporarily disabled for testing.
+        // We only check for a user in session storage (for mock logins).
+        try {
+            const storedUser = sessionStorage.getItem('authUser');
+            if (storedUser) {
+                setUser(JSON.parse(storedUser));
+            }
+        } catch (error) {
+            console.error("Failed to parse auth user from session storage", error);
+            sessionStorage.removeItem('authUser');
+        } finally {
+            setIsLoading(false);
+        }
+        
+        /*
+        // --- Original Firebase implementation (temporarily disabled) ---
         // Use Firebase's observer to manage auth state
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
             if (firebaseUser) {
@@ -59,6 +75,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
         // Cleanup subscription on unmount
         return () => unsubscribe();
+        */
     }, []);
 
     const handleLogin = (userData: AppUser) => {
@@ -68,20 +85,20 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     // --- Real Firebase Methods ---
     const signInWithGoogle = async () => {
-        try {
-            await signInWithPopup(auth, googleProvider);
-            // onAuthStateChanged will handle setting the user state
-        } catch (error) {
-            console.error("Firebase Google sign-in error:", error);
-            // Handle error for the user
-        }
+        // Temporarily disabled
+        console.log("Google Sign-In is temporarily disabled for testing.");
+        alert("La connexion Google est temporairement désactivée pour les tests.");
+        return Promise.resolve();
     };
     
     const logout = async () => {
+        // Temporarily disabled Firebase logout.
+        /*
         // Check if the user was a Firebase user
         if (auth.currentUser) {
             await signOut(auth);
         }
+        */
         // Always clear session storage for mock users
         sessionStorage.removeItem('authUser');
         setUser(null);
