@@ -1,4 +1,3 @@
-
 // components/Settings.tsx
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -53,7 +52,7 @@ const Settings: React.FC = () => {
 
                 <div className="bg-white dark:bg-brand-secondary shadow-md rounded-lg p-8 mt-8">
                      <h2 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">{t('settings.integrations')}</h2>
-                     <div className="flex items-center justify-between mb-6">
+                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
                          <div>
                             <p className="font-medium text-gray-800 dark:text-gray-200">{t('settings.googleDrive')}</p>
                             <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.googleDriveDesc')}</p>
@@ -61,17 +60,19 @@ const Settings: React.FC = () => {
                          <button 
                             onClick={connectGoogleDrive}
                             disabled={cloneUser.googleDriveConnected}
-                            className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
+                            className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed self-start sm:self-auto"
                          >
                             {cloneUser.googleDriveConnected ? t('settings.connected') : t('settings.connect')}
                          </button>
                      </div>
-                     <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex items-center justify-between">
+                     <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                          <div>
                             <p className="font-medium text-gray-800 dark:text-gray-200">Langue</p>
                             <p className="text-sm text-gray-500 dark:text-gray-400">Choisissez la langue d'affichage</p>
                          </div>
-                         <LanguageSwitcher />
+                         <div className="self-start sm:self-auto">
+                            <LanguageSwitcher />
+                         </div>
                      </div>
                 </div>
             </div>

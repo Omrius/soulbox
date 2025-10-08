@@ -4,20 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOULBOX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class', // Allows for light/dark mode toggling
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
           colors: {
-            // New "Calm & Professional" Palette
-            'brand-dark': '#0F172A',       // Deep navy for dark mode background
-            'brand-secondary': '#1E293B',   // Dark slate for cards in dark mode
-            'brand-tertiary': '#334155',    // Lighter slate for borders/dividers in dark mode
-            'brand-accent': '#38BDF8',      // Sky blue for highlights, buttons, and active states
-            'brand-light-bg': '#F8FAFC',    // Very light gray (off-white) for light mode background
-            'brand-light-card': '#FFFFFF',  // Pure white for cards in light mode
+            // Original Palette (kept for dashboard consistency)
+            'brand-dark': '#0F172A',
+            'brand-secondary': '#1E293B',
+            'brand-tertiary': '#334155',
+            'brand-accent': '#38BDF8',
+            'brand-light-bg': '#F8FAFC',
+            'brand-light-card': '#FFFFFF',
+            // New Landing Page Palette
+            'deep-blue': '#0B2340',
+            'gold': '#D9A441',
+            'soft-violet': '#7B5AA8',
+            'off-white': '#F7F8FA',
           },
         },
       },
@@ -60,7 +71,7 @@
 }
 </script>
 </head>
-<body class="h-full bg-brand-light-bg dark:bg-brand-dark antialiased">
+<body class="h-full bg-off-white dark:bg-deep-blue antialiased font-sans">
   <div id="root" class="h-full"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

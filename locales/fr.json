@@ -1,4 +1,3 @@
-
 {
   "common": {
     "loading": "Chargement...",
@@ -14,22 +13,170 @@
     "or": "OU",
     "status": "Statut",
     "actions": "Actions",
-    "view": "Voir"
+    "view": "Voir",
+    "edit": "Modifier",
+    "browserNoAudio": "Votre navigateur ne supporte pas l'élément audio."
   },
-  "landing": {
-    "title": "SoulBox",
-    "login": "Connexion",
-    "headline": "Préservez votre héritage numérique.",
-    "subheadline": "SoulBox vous permet de créer un clone numérique de vous-même, de sécuriser vos souvenirs et de les transmettre à vos proches, pour toujours.",
-    "cta": "Commencer mon expérience",
-    "howItWorks": "Comment ça marche ?",
-    "feature1Title": "Entraînez votre Clone",
-    "feature1Desc": "Répondez à des questions et importez vos écrits pour que votre clone apprenne votre personnalité, votre humour et votre façon de parler.",
-    "feature2Title": "Sécurisez vos Souvenirs",
-    "feature2Desc": "Déposez des messages, des photos et des documents importants dans un coffre-fort numérique inviolable, protégé par vos gardiens de confiance.",
-    "feature3Title": "Communiquez au-delà",
-    "feature3Desc": "Vos proches pourront interagir avec votre clone, recevoir vos messages et ressentir votre présence, même lorsque vous ne serez plus là.",
-    "footer": "© {{year}} SoulBox. Tous droits réservés."
+  "landingPage": {
+    "header": {
+      "product": "Produit",
+      "howItWorks": "Comment ça marche",
+      "security": "Sécurité",
+      "pricing": "Tarifs",
+      "faq": "FAQ",
+      "login": "Connexion",
+      "ctaTest": "Essayer gratuitement",
+      "ctaDemo": "Voir la démo audio"
+    },
+    "hero": {
+      "h1": "SoulBox — La présence qui rassure, même après le départ",
+      "lead": "Conservez la voix et les souvenirs de vos proches. Un clone digital sécurisé qui apporte réconfort et sérénité.",
+      "ctaTry": "Essayer gratuitement",
+      "ctaListen": "Écouter la démo"
+    },
+    "valueProps": [
+      {
+        "title": "Voix Authentique",
+        "body": "Recréez une présence vocale fidèle et chaleureuse à partir d'un simple enregistrement."
+      },
+      {
+        "title": "Coffre-fort Privé",
+        "body": "Scellez vos messages et souvenirs, libérés uniquement selon vos conditions par vos gardiens."
+      },
+      {
+        "title": "Sécurité Absolue",
+        "body": "Profitez d'un chiffrement de pointe et d'une transparence totale pour une paix d'esprit garantie."
+      }
+    ],
+    "howItWorks": {
+      "title": "Comment ça marche ?",
+      "steps": [
+        {
+          "title": "Enregistrez",
+          "body": "Enregistrez 2 à 5 minutes de la voix de votre proche. Notre guide vous accompagne pour une qualité optimale."
+        },
+        {
+          "title": "Créez",
+          "body": "Notre IA génère le clone vocal. Vous personnalisez le ton, les souvenirs et les messages à transmettre."
+        },
+        {
+          "title": "Partagez",
+          "body": "Définissez qui peut interagir avec le clone et comment les messages du coffre-fort sont délivrés."
+        }
+      ],
+      "cta": "Commencer maintenant"
+    },
+    "demo": {
+      "title": "Écoutez un extrait",
+      "subtitle": "Découvrez la chaleur et l'authenticité d'un clone vocal SoulBox.",
+      "transcription": "Papa disait toujours que le plus important n'était pas la destination, mais le chemin. Je crois que je comprends enfin ce qu'il voulait dire..."
+    },
+    "security": {
+      "title": "Conçu pour la confiance et la sérénité",
+      "subtitle": "Votre tranquillité d'esprit est notre priorité absolue. Nous utilisons des technologies de pointe pour garantir que votre héritage numérique est protégé et respecté.",
+      "features": [
+        "Chiffrement AES-GCM",
+        "Shards Shamir Multisig",
+        "HSM/KMS",
+        "Conforme RGPD",
+        "Audit & Watermark Audio"
+      ]
+    },
+    "pricing": {
+      "title": "Des tarifs clairs pour préserver ce qui compte",
+      "tiers": [
+        {
+          "name": "Standard",
+          "price": "9.99€",
+          "features": [
+            "Entraînement de base du clone",
+            "Coffre-fort numérique (1 Go)",
+            "Support par email"
+          ],
+          "cta": "Choisir Standard",
+          "isFeatured": false
+        },
+        {
+          "name": "Premium",
+          "price": "19.99€",
+          "features": [
+            "Entraînement avancé et personnalité",
+            "Création d'un Clone Vocal",
+            "Coffre-fort numérique (10 Go)",
+            "Accès prioritaire aux nouveautés"
+          ],
+          "cta": "Choisir Premium",
+          "isFeatured": true
+        },
+        {
+          "name": "Premium+",
+          "price": "29.99€",
+          "features": [
+            "Toutes les fonctionnalités Premium",
+            "Synchronisation Google Drive",
+            "Support prioritaire 24/7",
+            "Fonctionnalités avancées du coffre-fort"
+          ],
+          "cta": "Choisir Premium+",
+          "isFeatured": false
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Ce qu'ils en disent",
+      "quotes": [
+        {
+          "quote": "Entendre à nouveau la voix de mon père lire une histoire à ma fille... c'est un cadeau inestimable. Merci SoulBox.",
+          "name": "Marie",
+          "relation": "Fille de Jean"
+        },
+        {
+          "quote": "Le processus de création était simple et respectueux. Je suis serein de savoir que mes souvenirs seront transmis avec soin.",
+          "name": "Alain",
+          "relation": "Utilisateur"
+        },
+        {
+          "quote": "En tant que notaire, la sécurité et la traçabilité sont primordiales. SoulBox apporte une solution robuste et nécessaire.",
+          "name": "Me Dubois",
+          "relation": "Notaire Partenaire"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "questions": [
+        {
+          "q": "Le clonage vocal est-il vraiment réaliste ?",
+          "a": "Oui. Nous utilisons une technologie de pointe qui analyse les intonations, le rythme et le timbre de la voix à partir de quelques minutes d'enregistrement. Le résultat est une voix naturelle et chaleureuse, conçue pour capturer l'essence de la personne, et non pour la tromperie."
+        },
+        {
+          "q": "Comment fonctionne la sécurité 'multisig' du coffre-fort ?",
+          "a": "Votre coffre-fort est protégé par un système de 'partage de secrets'. Au lieu d'une seule clé, l'accès est divisé en plusieurs fragments distribués à vos gardiens. Un nombre défini de gardiens doit collaborer pour reconstituer la clé. Personne, pas même SoulBox, ne peut y accéder seul."
+        },
+        {
+          "q": "Comment SoulBox vérifie-t-il un décès avant de libérer les messages ?",
+          "a": "Le processus est initié par un bénéficiaire désigné. Ensuite, les gardiens que vous avez choisis doivent confirmer la situation de manière indépendante. Nous pouvons également intégrer la vérification via des documents officiels pour garantir qu'aucune libération n'ait lieu prématurément."
+        },
+        {
+          "q": "Que deviennent mes données après mon décès ?",
+          "a": "Vous restez propriétaire de vos données. Dans vos directives, vous pouvez désigner un 'exécuteur numérique' qui supervisera votre héritage. Le clone et son contenu sont gelés et ne peuvent plus être modifiés, garantissant que vos volontés sont respectées à la lettre."
+        },
+        {
+          "q": "Puis-je utiliser SoulBox de mon vivant, par exemple si je perds la capacité de parler ?",
+          "a": "Absolument. SoulBox peut servir de outil de communication assistée. Si une personne perd l'usage de sa voix, son clone vocal peut lui permettre de continuer à communiquer avec ses proches, offrant une présence familière et réconfortante dans des moments difficiles."
+        }
+      ]
+    },
+    "footer": {
+      "productTitle": "Produit",
+      "legalTitle": "Légal",
+      "cgu": "CGU",
+      "privacy": "Confidentialité",
+      "contact": "Contact",
+      "newsletterTitle": "Recevez la démo & nos actualités",
+      "subscribe": "S'inscrire",
+      "copyright": "© {{year}} SoulBox. Tous droits réservés."
+    }
   },
   "loginPage": {
     "creatorSpace": "Espace Créateur",
@@ -103,6 +250,9 @@
     "sealed": "Scellé",
     "guardiansAssigned": "{{count}} Gardiens assignés",
     "shardsRequired": "{{count}} fragments requis pour l'ouverture",
+    "sortBy": "Trier par :",
+    "sortNewest": "Plus récent",
+    "sortOldest": "Plus ancien",
     "modalTitle": "Ajouter un souvenir",
     "modalTitlePlaceholder": "Titre",
     "modalInspiration": "Besoin d'inspiration ?",
@@ -110,21 +260,29 @@
     "modalGenerate": "Générer",
     "modalGenerating": "Génération...",
     "modalContentLabel": "Message ou Contenu",
-    "modalSealButton": "Sceller et Sauvegarder"
+    "modalSealButton": "Sceller et Sauvegarder",
+    "modalGuardiansLabel": "Assigner des Gardiens",
+    "modalNoGuardians": "Aucun gardien trouvé. Veuillez en ajouter dans les 'Canaux de Partage'.",
+    "modalGuardiansDesc": "Les gardiens sélectionnés pourront participer au déverrouillage de cet élément."
   },
   "channels": {
     "title": "Canaux de Partage",
-    "subheadline": "Gérez les personnes (bénéficiaires) qui pourront interagir avec votre clone et accéder à votre coffre-fort.",
+    "subheadline": "Gérez les personnes (bénéficiaires et gardiens) qui pourront interagir avec votre clone et accéder à votre coffre-fort.",
+    "beneficiariesTab": "Bénéficiaires",
+    "guardiansTab": "Gardiens",
     "addBeneficiary": "Ajouter un bénéficiaire",
+    "addGuardian": "Ajouter un gardien",
     "loading": "Chargement...",
     "tableHeaderName": "Nom",
     "tableHeaderContact": "Contact",
     "tableHeaderToken": "Jeton Secret",
     "tableHeaderActions": "Actions",
+    "tableHeaderEmail": "Email",
     "sendByEmail": "Envoyer par Email",
     "sendBySms": "Envoyer par SMS",
     "delete": "Supprimer",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce bénéficiaire ?",
+    "confirmGuardianDelete": "Êtes-vous sûr de vouloir supprimer ce gardien ?",
     "tokenSentSuccess": "Jeton envoyé avec succès !",
     "tokenSentError": "Erreur lors de l'envoi du jeton.",
     "modalTitle": "Nouveau Bénéficiaire",
@@ -134,7 +292,12 @@
     "modalIdNumber": "Numéro de pièce d'identité",
     "modalRelationship": "Relation (ex: Fille, Ami proche)",
     "modalSecretQuestion": "Question secrète (ex: Nom de mon 1er chien?)",
-    "modalAddButton": "Ajouter"
+    "modalAddButton": "Ajouter",
+    "guardianModalTitleAdd": "Nouveau Gardien",
+    "guardianModalTitleEdit": "Modifier le Gardien",
+    "guardianModalName": "Nom complet",
+    "guardianModalAddButton": "Ajouter",
+    "guardianModalSaveButton": "Enregistrer"
   },
   "voiceClone": {
     "title": "Clone Vocal",
@@ -167,6 +330,7 @@
     "choosePlan": "Choisir ce plan",
     "redirecting": "Redirection...",
     "currentPlan": "Plan Actuel",
+    "perMonth": "/ mois",
     "planStandard": "Standard",
     "planPremium": "Premium",
     "planPremiumPlus": "Premium+",
@@ -256,7 +420,7 @@
     "settingsLastName": "Nom",
     "settingsPhone": "GSM",
     "privacyNoticeTitle": "Consignes de Confidentialité",
-    "privacyNoticeBody": "Votre jeton secret est strictement personnel et confidentiel. Ne le partagez avec personne. Il est la clé unique qui garantit la sécurité de votre accès aux souvenirs de {{name}}.",
+    "privacyNoticeBody": "Votre jeton secret est strictly personnel et confidentiel. Ne le partagez avec personne. Il est la clé unique qui garantit la sécurité de votre accès aux souvenirs de {{name}}.",
     "privacyTitle": "Politique de Confidentialité",
     "privacyDesc": "Informations sur la gestion de vos données."
   },

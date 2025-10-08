@@ -5,7 +5,7 @@ import React from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useI18n } from '../contexts/I18nContext.tsx';
 import { CloneUser } from '../types.ts';
-import { LockIcon, VoiceIcon, BrainIcon } from './icons/Icon.tsx';
+import { VaultIcon, VoiceWaveIcon, BrainIcon } from './icons/Icon.tsx';
 
 const StatCard: React.FC<{ title: string; value: string; icon: React.ReactNode }> = ({ title, value, icon }) => (
     <div className="bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-md flex items-center">
@@ -48,8 +48,8 @@ const Dashboard: React.FC = () => {
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <StatCard title={t('dashboard.currentPlan')} value={cloneUser.plan} icon={<BrainIcon className="w-6 h-6"/>} />
-                <StatCard title={t('dashboard.vaultStatus')} value={t('dashboard.vaultStatusValue')} icon={<LockIcon className="w-6 h-6"/>} />
-                <StatCard title={t('dashboard.voiceCloneStatus')} value={t('dashboard.voiceCloneStatusValue')} icon={<VoiceIcon className="w-6 h-6"/>} />
+                <StatCard title={t('dashboard.vaultStatus')} value={t('dashboard.vaultStatusValue')} icon={<VaultIcon className="w-6 h-6"/>} />
+                <StatCard title={t('dashboard.voiceCloneStatus')} value={t('dashboard.voiceCloneStatusValue')} icon={<VoiceWaveIcon className="w-6 h-6"/>} />
             </div>
 
             <div className="mt-8 bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-md">

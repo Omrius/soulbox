@@ -1,4 +1,3 @@
-
 {
   "common": {
     "loading": "Loading...",
@@ -14,22 +13,170 @@
     "or": "OR",
     "status": "Status",
     "actions": "Actions",
-    "view": "View"
+    "view": "View",
+    "edit": "Edit",
+    "browserNoAudio": "Your browser does not support the audio element."
   },
-  "landing": {
-    "title": "SoulBox",
-    "login": "Login",
-    "headline": "Preserve your digital legacy.",
-    "subheadline": "SoulBox allows you to create a digital clone of yourself, secure your memories, and pass them on to your loved ones, forever.",
-    "cta": "Start My Experience",
-    "howItWorks": "How does it work?",
-    "feature1Title": "Train Your Clone",
-    "feature1Desc": "Answer questions and import your writings so your clone can learn your personality, humor, and way of speaking.",
-    "feature2Title": "Secure Your Memories",
-    "feature2Desc": "Deposit messages, photos, and important documents in a tamper-proof digital vault, protected by your trusted guardians.",
-    "feature3Title": "Communicate Beyond",
-    "feature3Desc": "Your loved ones will be able to interact with your clone, receive your messages, and feel your presence, even when you are no longer there.",
-    "footer": "© {{year}} SoulBox. All rights reserved."
+  "landingPage": {
+    "header": {
+      "product": "Product",
+      "howItWorks": "How It Works",
+      "security": "Security",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "login": "Login",
+      "ctaTest": "Try for free",
+      "ctaDemo": "See Audio Demo"
+    },
+    "hero": {
+      "h1": "SoulBox — The presence that reassures, even after departure",
+      "lead": "Preserve the voice and memories of your loved ones. A secure digital clone that brings comfort and serenity.",
+      "ctaTry": "Try for free",
+      "ctaListen": "Listen to the demo"
+    },
+    "valueProps": [
+      {
+        "title": "Authentic Voice",
+        "body": "Recreate a faithful and warm vocal presence from a simple recording."
+      },
+      {
+        "title": "Private Vault",
+        "body": "Seal your messages and memories, released only on your terms by your guardians."
+      },
+      {
+        "title": "Absolute Security",
+        "body": "Benefit from state-of-the-art encryption and full transparency for guaranteed peace of mind."
+      }
+    ],
+    "howItWorks": {
+      "title": "How does it work?",
+      "steps": [
+        {
+          "title": "Record",
+          "body": "Record 2-5 minutes of your loved one's voice. Our guide helps you achieve optimal quality."
+        },
+        {
+          "title": "Create",
+          "body": "Our AI generates the voice clone. You customize the tone, memories, and messages to be passed on."
+        },
+        {
+          "title": "Share",
+          "body": "Define who can interact with the clone and how vault messages are delivered."
+        }
+      ],
+      "cta": "Start now"
+    },
+    "demo": {
+      "title": "Listen to a sample",
+      "subtitle": "Discover the warmth and authenticity of a SoulBox voice clone.",
+      "transcription": "Dad always said that the most important thing wasn't the destination, but the journey. I think I finally understand what he meant..."
+    },
+    "security": {
+      "title": "Designed for Trust and Peace of Mind",
+      "subtitle": "Your peace of mind is our top priority. We use state-of-the-art technologies to ensure your digital legacy is protected and respected.",
+      "features": [
+        "AES-GCM Encryption",
+        "Shamir Multisig Shards",
+        "HSM/KMS",
+        "GDPR Ready",
+        "Audio Audit & Watermark"
+      ]
+    },
+    "pricing": {
+      "title": "Clear pricing to preserve what matters",
+      "tiers": [
+        {
+          "name": "Standard",
+          "price": "€9.99",
+          "features": [
+            "Basic clone training",
+            "Digital vault (1 GB)",
+            "Email support"
+          ],
+          "cta": "Choose Standard",
+          "isFeatured": false
+        },
+        {
+          "name": "Premium",
+          "price": "€19.99",
+          "features": [
+            "Advanced training & personality",
+            "Voice Clone creation",
+            "Digital vault (10 GB)",
+            "Priority access to new features"
+          ],
+          "cta": "Choose Premium",
+          "isFeatured": true
+        },
+        {
+          "name": "Premium+",
+          "price": "€29.99",
+          "features": [
+            "All Premium features",
+            "Google Drive synchronization",
+            "24/7 priority support",
+            "Advanced vault features"
+          ],
+          "cta": "Choose Premium+",
+          "isFeatured": false
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "What they say",
+      "quotes": [
+        {
+          "quote": "Hearing my father's voice again, reading a story to my daughter... it's a priceless gift. Thank you, SoulBox.",
+          "name": "Mary",
+          "relation": "Daughter of John"
+        },
+        {
+          "quote": "The creation process was simple and respectful. I'm at peace knowing my memories will be passed on with care.",
+          "name": "Alan",
+          "relation": "User"
+        },
+        {
+          "quote": "As a notary, security and traceability are paramount. SoulBox provides a robust and necessary solution.",
+          "name": "Mr. Dubois",
+          "relation": "Partner Notary"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "questions": [
+        {
+          "q": "Is the voice cloning truly realistic?",
+          "a": "Yes. We use state-of-the-art technology that analyzes intonation, rhythm, and timbre from just a few minutes of recording. The result is a natural and warm voice, designed to capture the essence of the person, not for deception."
+        },
+        {
+          "q": "How does the 'multisig' vault security work?",
+          "a": "Your vault is protected by a 'secret sharing' system. Instead of a single key, access is split into several fragments distributed to your guardians. A set number of guardians must collaborate to reassemble the key. No one, not even SoulBox, can access it alone."
+        },
+        {
+          "q": "How does SoulBox verify a death before releasing messages?",
+          "a": "The process is initiated by a designated beneficiary. Then, the guardians you've chosen must independently confirm the situation. We can also integrate verification via official documents to ensure no premature release occurs."
+        },
+        {
+          "q": "What happens to my data after I pass away?",
+          "a": "You remain the owner of your data. In your directives, you can appoint a 'digital executor' to oversee your legacy. The clone and its contents are frozen and can no longer be modified, ensuring your wishes are respected to the letter."
+        },
+        {
+          "q": "Can I use SoulBox while I'm alive, for instance, if I lose the ability to speak?",
+          "a": "Absolutely. SoulBox can serve as an assistive communication tool. If a person loses their ability to speak, their voice clone can allow them to continue communicating with loved ones, providing a familiar and comforting presence in difficult times."
+        }
+      ]
+    },
+    "footer": {
+      "productTitle": "Product",
+      "legalTitle": "Legal",
+      "cgu": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "contact": "Contact",
+      "newsletterTitle": "Get the demo & our news",
+      "subscribe": "Subscribe",
+      "copyright": "© {{year}} SoulBox. All rights reserved."
+    }
   },
   "loginPage": {
     "creatorSpace": "Creator Space",
@@ -103,6 +250,9 @@
     "sealed": "Sealed",
     "guardiansAssigned": "{{count}} Guardians assigned",
     "shardsRequired": "{{count}} shards required for unsealing",
+    "sortBy": "Sort by:",
+    "sortNewest": "Newest first",
+    "sortOldest": "Oldest first",
     "modalTitle": "Add a memory",
     "modalTitlePlaceholder": "Title",
     "modalInspiration": "Need inspiration?",
@@ -110,21 +260,29 @@
     "modalGenerate": "Generate",
     "modalGenerating": "Generating...",
     "modalContentLabel": "Message or Content",
-    "modalSealButton": "Seal and Save"
+    "modalSealButton": "Seal and Save",
+    "modalGuardiansLabel": "Assign Guardians",
+    "modalNoGuardians": "No guardians found. Please add them in the 'Sharing Channels' section.",
+    "modalGuardiansDesc": "The selected guardians will be able to participate in unlocking this item."
   },
   "channels": {
     "title": "Sharing Channels",
-    "subheadline": "Manage the people (beneficiaries) who can interact with your clone and access your vault.",
+    "subheadline": "Manage the people (beneficiaries and guardians) who can interact with your clone and access your vault.",
+    "beneficiariesTab": "Beneficiaries",
+    "guardiansTab": "Guardians",
     "addBeneficiary": "Add Beneficiary",
+    "addGuardian": "Add Guardian",
     "loading": "Loading...",
     "tableHeaderName": "Name",
     "tableHeaderContact": "Contact",
     "tableHeaderToken": "Secret Token",
     "tableHeaderActions": "Actions",
+    "tableHeaderEmail": "Email",
     "sendByEmail": "Send by Email",
     "sendBySms": "Send by SMS",
     "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete this beneficiary?",
+    "confirmGuardianDelete": "Are you sure you want to delete this guardian?",
     "tokenSentSuccess": "Token sent successfully!",
     "tokenSentError": "Error sending token.",
     "modalTitle": "New Beneficiary",
@@ -134,7 +292,12 @@
     "modalIdNumber": "ID Card Number",
     "modalRelationship": "Relationship (e.g., Daughter, Close friend)",
     "modalSecretQuestion": "Secret question (e.g., Name of my first dog?)",
-    "modalAddButton": "Add"
+    "modalAddButton": "Add",
+    "guardianModalTitleAdd": "New Guardian",
+    "guardianModalTitleEdit": "Edit Guardian",
+    "guardianModalName": "Full Name",
+    "guardianModalAddButton": "Add",
+    "guardianModalSaveButton": "Save"
   },
   "voiceClone": {
     "title": "Voice Clone",
@@ -167,6 +330,7 @@
     "choosePlan": "Choose this plan",
     "redirecting": "Redirecting...",
     "currentPlan": "Current Plan",
+    "perMonth": "/ month",
     "planStandard": "Standard",
     "planPremium": "Premium",
     "planPremiumPlus": "Premium+",

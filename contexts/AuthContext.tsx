@@ -30,23 +30,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Firebase auth is temporarily disabled for testing.
-        // We only check for a user in session storage (for mock logins).
-        try {
-            const storedUser = sessionStorage.getItem('authUser');
-            if (storedUser) {
-                setUser(JSON.parse(storedUser));
-            }
-        } catch (error) {
-            console.error("Failed to parse auth user from session storage", error);
-            sessionStorage.removeItem('authUser');
-        } finally {
-            setIsLoading(false);
-        }
-        
-        /*
-        // --- Original Firebase implementation (temporarily disabled) ---
-        // Use Firebase's observer to manage auth state
+        // Use Firebase's observer to manage auth state for both Google and mock users
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
             if (firebaseUser) {
                 // User is signed in via Firebase
@@ -62,10 +46,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 sessionStorage.setItem('authUser', JSON.stringify(appUser));
                 setUser(appUser);
             } else {
-                // User is signed out or using a mock login
+                // User is signed out of Firebase.
+                // Check if a mock user is still in session storage.
                 const storedUser = sessionStorage.getItem('authUser');
                 if (storedUser) {
-                    setUser(JSON.parse(storedUser));
+                     try {
+                       setUser(JSON.parse(storedUser));
+                    } catch (e) {
+                       console.error("Error parsing session user, clearing.", e);
+                       sessionStorage.removeItem('authUser');
+                       setUser(null);
+                    }
                 } else {
                     setUser(null);
                 }
@@ -75,7 +66,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
         // Cleanup subscription on unmount
         return () => unsubscribe();
-        */
     }, []);
 
     const handleLogin = (userData: AppUser) => {
@@ -85,24 +75,29 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     // --- Real Firebase Methods ---
     const signInWithGoogle = async () => {
-        // Temporarily disabled
-        console.log("Google Sign-In is temporarily disabled for testing.");
-        alert("La connexion Google est temporairement désactivée pour les tests.");
-        return Promise.resolve();
+       try {
+            await signInWithPopup(auth, googleProvider);
+            // The onAuthStateChanged listener will handle setting the user state.
+       } catch (error) {
+            console.error("Google Sign-In Error", error);
+            alert("Une erreur est survenue lors de la connexion avec Google.");
+       }
     };
     
     const logout = async () => {
-        // Temporarily disabled Firebase logout.
-        /*
-        // Check if the user was a Firebase user
-        if (auth.currentUser) {
-            await signOut(auth);
+        try {
+            // Check if the user was a Firebase user before signing out
+             if (auth.currentUser) {
+                await signOut(auth);
+            }
+        } catch (error) {
+            console.error("Firebase sign out error", error);
+        } finally {
+             // Always clear session storage for both mock and Firebase users
+            sessionStorage.removeItem('authUser');
+            setUser(null);
+            window.location.href = '/'; // Redirect to home
         }
-        */
-        // Always clear session storage for mock users
-        sessionStorage.removeItem('authUser');
-        setUser(null);
-        window.location.href = '/';
     };
 
     // --- Mock Methods (unchanged) ---

@@ -1,5 +1,5 @@
 // services/authService.ts
-import { AppUser, CloneUser, ConsulteurUser, AdminUser, PlanTier, Beneficiary, UnlockAttempt } from '../types.ts';
+import { AppUser, CloneUser, ConsulteurUser, AdminUser, PlanTier, Beneficiary, UnlockAttempt, Guardian } from '../types.ts';
 
 // --- Mock Data Store ---
 
@@ -35,6 +35,12 @@ let mockBeneficiaries: Beneficiary[] = [
         secretQuestion: 'Nom de mon premier chien ?',
         secretToken: 'TOKEN_MARIE_123'
     }
+];
+
+let mockGuardians: Guardian[] = [
+    { id: 'g_1', name: 'Alice Dupont', email: 'alice.d@example.com' },
+    { id: 'g_2', name: 'Bob Martin', email: 'bob.m@example.com' },
+    { id: 'g_3', name: 'Charlie Durand', email: 'charlie.d@example.com' },
 ];
 
 
@@ -235,5 +241,48 @@ export const verifySecretAccess = async (attempt: UnlockAttempt, beneficiaryId: 
                 resolve({ success: false, message: error });
             }
         }, 1500);
+    });
+};
+
+// --- NEW: Guardian Management Functions ---
+
+export const fetchGuardians = async (): Promise<Guardian[]> => {
+    return new Promise(resolve => setTimeout(() => resolve([...mockGuardians]), 500));
+};
+
+export const addGuardian = async (data: { name: string; email: string }): Promise<Guardian> => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            const newGuardian: Guardian = {
+                id: `g_${Date.now()}`,
+                name: data.name,
+                email: data.email,
+            };
+            mockGuardians.push(newGuardian);
+            resolve(newGuardian);
+        }, 1000);
+    });
+};
+
+export const updateGuardian = async (guardianId: string, data: { name: string; email: string }): Promise<Guardian> => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const index = mockGuardians.findIndex(g => g.id === guardianId);
+            if (index !== -1) {
+                mockGuardians[index] = { ...mockGuardians[index], ...data };
+                resolve(mockGuardians[index]);
+            } else {
+                reject(new Error("Guardian not found"));
+            }
+        }, 1000);
+    });
+};
+
+export const deleteGuardian = async (id: string): Promise<void> => {
+     return new Promise(resolve => {
+        setTimeout(() => {
+            mockGuardians = mockGuardians.filter(g => g.id !== id);
+            resolve();
+        }, 500);
     });
 };

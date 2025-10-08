@@ -5,9 +5,9 @@ import { useI18n } from '../contexts/I18nContext.tsx';
 import { DashboardView } from '../types.ts';
 import {
     HomeIcon,
-    LockIcon,
+    VaultIcon,
     ShareIcon,
-    VoiceIcon,
+    VoiceWaveIcon,
     BrainIcon,
     BillingIcon,
     SettingsIcon,
@@ -59,9 +59,9 @@ const SideNav: React.FC<SideNavProps> = ({ currentView, setCurrentView, isMobile
 
     const navItems = [
         { view: DashboardView.DASHBOARD, label: t('nav.dashboard'), icon: <HomeIcon className="w-6 h-6" /> },
-        { view: DashboardView.VAULT, label: t('nav.vault'), icon: <LockIcon className="w-6 h-6" /> },
+        { view: DashboardView.VAULT, label: t('nav.vault'), icon: <VaultIcon className="w-6 h-6" /> },
         { view: DashboardView.CHANNELS, label: t('nav.channels'), icon: <ShareIcon className="w-6 h-6" /> },
-        { view: DashboardView.VOICE, label: t('nav.voiceClone'), icon: <VoiceIcon className="w-6 h-6" /> },
+        { view: DashboardView.VOICE, label: t('nav.voiceClone'), icon: <VoiceWaveIcon className="w-6 h-6" /> },
         { view: DashboardView.TRAINING_CENTER, label: t('nav.trainingCenter'), icon: <BrainIcon className="w-6 h-6" /> },
         { view: DashboardView.BILLING, label: t('nav.billing'), icon: <BillingIcon className="w-6 h-6" /> },
         { view: DashboardView.SETTINGS, label: t('nav.settings'), icon: <SettingsIcon className="w-6 h-6" /> },

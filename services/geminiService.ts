@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
-import { SealedItem, TrainingData, TrainingDocument, PublicCloneInfo } from '../types.ts';
+import { SealedItem, TrainingData, TrainingDocument, PublicCloneInfo, Guardian } from '../types.ts';
 import { uploadFileToDrive } from './googleDriveService.ts';
+import { fetchGuardians } from './authService.ts';
 
 // Per guidelines, initialize the SDK and assume process.env.API_KEY is available.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
@@ -104,8 +105,13 @@ export const fetchSealedItems = async (): Promise<SealedItem[]> => {
 };
 
 export const createSealedItem = async (itemData: any): Promise<SealedItem> => {
+    const allGuardians = await fetchGuardians();
     return new Promise(resolve => {
         setTimeout(() => {
+            const selectedGuardians = itemData.guardians
+                .map((g: { id: string }) => allGuardians.find(ag => ag.id === g.id))
+                .filter((g: Guardian | undefined): g is Guardian => g !== undefined);
+
             const newItem: SealedItem = {
                 id: `item_${Date.now()}`,
                 title: itemData.title,
@@ -113,7 +119,7 @@ export const createSealedItem = async (itemData: any): Promise<SealedItem> => {
                 createdAt: new Date().toISOString(),
                 status: 'sealed',
                 shards_required: itemData.shards_required,
-                guardians: itemData.guardians.map((g: any, i: number) => ({...g, id: g.id, name: `Gardien ${i+1}`, email: `gardien${i+1}@example.com`})), // Mock names/emails
+                guardians: selectedGuardians,
                 metadata: { type: itemData.payload_type === 'text' ? 'message' : 'file' }
             };
             mockSealedItems.push(newItem);

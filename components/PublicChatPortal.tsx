@@ -1,4 +1,3 @@
-
 // Renamed from PublicChatPortal.tsx to ProcheDashboard.tsx
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -99,7 +98,7 @@ const ProcheChat: React.FC = () => {
                 {messages.map((msg, index) => (
                     <div key={index} className={`flex items-start gap-3 ${msg.sender === 'user' ? 'justify-end' : ''}`}>
                         {msg.sender === 'clone' && <UserCircleIcon className="w-8 h-8 text-brand-accent flex-shrink-0" />}
-                        <div className={`p-3 rounded-lg max-w-xs md:max-w-md ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-brand-tertiary text-gray-800 dark:text-gray-200'}`}>
+                        <div className={`p-3 rounded-lg max-w-xs sm:max-w-sm md:max-w-md ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-brand-tertiary text-gray-800 dark:text-gray-200'}`}>
                             <p style={{whiteSpace: "pre-wrap"}}>{msg.text}</p>
                         </div>
                     </div>

@@ -1,4 +1,3 @@
-
 // components/LoginPage.tsx
 import React, { useState, FormEvent, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -48,11 +47,13 @@ const LoginPage: React.FC<{ initialView: View }> = ({ initialView }) => {
     const [adminPassword, setAdminPassword] = useState('');
 
     useEffect(() => {
-        // If navigating directly to a login URL, show the panel immediately
-        const path = window.location.pathname;
-        if (path.startsWith('/login') || path.startsWith('/portal') || path.startsWith('/admin')) {
-          setIsLoginVisible(true);
-        }
+        // Since this component is only mounted when it should be visible,
+        // we trigger the animation shortly after mount.
+        const timer = setTimeout(() => {
+            setIsLoginVisible(true);
+        }, 100); // A small delay ensures the transition is applied.
+        
+        return () => clearTimeout(timer);
     }, []);
     
     const changeBackground = () => {

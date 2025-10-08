@@ -30,8 +30,18 @@ export const HomeIcon: React.FC<IconProps> = ({ className }) => (
   <svg {...svgProps} className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955a1.5 1.5 0 012.122 0l8.954 8.955M3 10.5v9.75a1.5 1.5 0 001.5 1.5h15a1.5 1.5 0 001.5-1.5V10.5M9 21V12h6v9" /></svg>
 );
 
-// --- Redesigned Landing Page Icons ---
+// Fix: Add missing LockIcon.
 export const LockIcon: React.FC<IconProps> = ({ className }) => (
+    <svg {...svgProps} className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 00-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+);
+
+// Fix: Add missing MessageIcon.
+export const MessageIcon: React.FC<IconProps> = ({ className }) => (
+    <svg {...svgProps} className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.722.345c-.44.041-.882.122-1.305.242a5.986 5.986 0 01-2.995.242c-1.123 0-2.21-.356-3.134-.958a5.986 5.986 0 01-2.02-2.133 5.986 5.986 0 01-.5-2.133 6.01 6.01 0 01.242-2.995c.12-.423.201-.865.242-1.305l.345-3.722c.093-1.133.956-1.98 2.097-1.98h4.286c.97 0 1.813.616 2.097 1.5z" /></svg>
+);
+
+// --- Redesigned Landing Page Icons ---
+export const VaultIcon: React.FC<IconProps> = ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2C9.23858 2 7 4.23858 7 7V11H17V7C17 4.23858 14.7614 2 12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M5 11H19V20C19 21.1046 18.1046 22 17 22H7C5.89543 22 5 21.1046 5 20V11Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -39,18 +49,20 @@ export const LockIcon: React.FC<IconProps> = ({ className }) => (
     </svg>
 );
 
-export const MessageIcon: React.FC<IconProps> = ({ className }) => (
+export const ShieldIcon: React.FC<IconProps> = ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 7.00005C4 6.44776 4.44772 6.00005 5 6.00005H19C19.5523 6.00005 20 6.44776 20 7.00005V17C20 17.5523 19.5523 18 19 18H5C4.44772 18 4 17.5523 4 17V7.00005Z" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M7 9L11.5 12L17 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 
-export const VoiceIcon: React.FC<IconProps> = ({ className }) => (
+
+export const VoiceWaveIcon: React.FC<IconProps> = ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="9" y="3" width="6" height="12" rx="3" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M5 11V12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 19V22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3 10V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M7 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M12 4V20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M17 7V17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M21 10V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
 );
 // --- End Redesigned Icons ---
@@ -93,7 +105,7 @@ export const MicrophoneIcon: React.FC<IconProps> = ({ className }) => (
 );
 
 export const TrashIcon: React.FC<IconProps> = ({ className }) => (
-  <svg {...svgProps} className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.067-2.09 1.02-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+  <svg {...svgProps} className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 4.811 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.067-2.09 1.02-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
 );
 
 export const UploadCloudIcon: React.FC<IconProps> = ({ className }) => (
@@ -158,4 +170,16 @@ export const CCGIcon: React.FC<IconProps> = ({ className }) => (
 
 export const RGPDPIcon: React.FC<IconProps> = ({ className }) => (
     <svg {...svgProps} className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 20.944A12.02 12.02 0 0012 22a12.02 12.02 0 009-1.056c.343-.344.652-.705.923-1.085A11.953 11.953 0 0021.482 12c0-1.74-.253-3.414-.72-5.016z" /></svg>
+);
+
+export const PencilIcon: React.FC<IconProps> = ({ className }) => (
+  <svg {...svgProps} className={className} fill="currentColor"><path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" /><path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" /></svg>
+);
+
+export const PlayIcon: React.FC<IconProps> = ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+);
+
+export const CheckIcon: React.FC<IconProps> = ({ className }) => (
+  <svg {...svgProps} className={className}><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
 );
