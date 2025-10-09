@@ -1,9 +1,10 @@
 
 
+
 // components/AdminDashboard.tsx
 import React from 'react';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { ChartBarIcon, UserGroupIcon, ShieldCheckIcon } from './icons/Icon.tsx';
+import { useI18n } from '../contexts/I18nContext';
+import { ChartBarIcon, UserGroupIcon, ShieldCheckIcon } from './icons/Icon';
 
 const StatCard: React.FC<{ title: string; value: string; icon: React.ReactNode }> = ({ title, value, icon }) => (
     <div className="stat-card">

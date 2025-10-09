@@ -1,11 +1,12 @@
 
 
+
 // components/Dashboard.tsx
 import React from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { CloneUser } from '../types.ts';
-import { VaultIcon, VoiceWaveIcon, BrainIcon } from './icons/Icon.tsx';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
+import { CloneUser } from '../types';
+import { VaultIcon, VoiceWaveIcon, BrainIcon } from './icons/Icon';
 
 const StatCard: React.FC<{ title: string; value: string; icon: React.ReactNode }> = ({ title, value, icon }) => (
     <div className="stat-card">

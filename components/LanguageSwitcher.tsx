@@ -1,8 +1,9 @@
 
 
+
 // components/LanguageSwitcher.tsx
 import React from 'react';
-import { useI18n } from '../contexts/I18nContext.tsx';
+import { useI18n } from '../contexts/I18nContext';
 
 // Fix: Add style prop to allow inline styling.
 const LanguageSwitcher: React.FC<{ className?: string, style?: React.CSSProperties }> = ({ className, style }) => {

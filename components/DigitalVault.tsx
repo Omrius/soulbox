@@ -1,10 +1,10 @@
 // components/DigitalVault.tsx
 import React, { useState, useEffect } from 'react';
-import { fetchSealedItems, createSealedItem, generateInspiration } from '../services/geminiService.ts';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { SealedItem, Guardian } from '../types.ts';
-import { PlusIcon, SparklesIcon, LockIcon, FileTextIcon, UsersIcon, ShieldCheckIcon } from './icons/Icon.tsx';
-import { fetchGuardians } from '../services/authService.ts';
+import { fetchSealedItems, createSealedItem, generateInspiration } from '../services/geminiService';
+import { useI18n } from '../contexts/I18nContext';
+import { SealedItem, Guardian } from '../types';
+import { PlusIcon, SparklesIcon, LockIcon, FileTextIcon, UsersIcon, ShieldCheckIcon } from './icons/Icon';
+import { fetchGuardians } from '../services/authService';
 
 type SortOrder = 'newest' | 'oldest';
 

@@ -1,13 +1,13 @@
 // components/AdminDashboardLayout.tsx
 import React, { useState } from 'react';
-import { AdminDashboardView } from '../types.ts';
-import AdminSideNav from './AdminSideNav.tsx';
-import { Header } from './Header.tsx';
-import AdminDashboard from './AdminDashboard.tsx';
-import AdminClientManagement from './AdminClientManagement.tsx';
-import AdminVerificationQueue from './AdminVerificationQueue.tsx';
-import AdminPayments from './AdminPayments.tsx';
-import AdminSettings from './AdminSettings.tsx';
+import { AdminDashboardView } from '../types';
+import AdminSideNav from './AdminSideNav';
+import { Header } from './Header';
+import AdminDashboard from './AdminDashboard';
+import AdminClientManagement from './AdminClientManagement';
+import AdminVerificationQueue from './AdminVerificationQueue';
+import AdminPayments from './AdminPayments';
+import AdminSettings from './AdminSettings';
 
 const NavOverlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
     <div 

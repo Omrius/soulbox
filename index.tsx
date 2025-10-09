@@ -1,11 +1,10 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles.css'; // Ensure CSS is loaded
 // Fix: Add .tsx extension to imports
-import App from './App.tsx';
-import { AuthProvider } from './contexts/AuthContext.tsx';
-import { I18nProvider } from './contexts/I18nContext.tsx';
+import App from './App';
+import { AuthProvider } from './contexts/AuthContext';
+import { I18nProvider } from './contexts/I18nContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

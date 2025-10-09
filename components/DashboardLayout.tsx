@@ -1,20 +1,21 @@
 
 
+
 import React, { useState, useEffect } from 'react';
 // Fix: Add .tsx extension to imports
-import SideNav from './SideNav.tsx';
-import { Header } from './Header.tsx';
-import { CloneUser, DashboardView } from '../types.ts';
-import Dashboard from './Dashboard.tsx';
-import DigitalVault from './DigitalVault.tsx';
-import Channels from './Channels.tsx';
-import VoiceClone from './VoiceClone.tsx';
-import TrainingCenter from './TrainingCenter.tsx';
-import PricingTiers from './PricingTiers.tsx';
-import Settings from './Settings.tsx';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { GoogleIcon } from './icons/Icon.tsx';
+import SideNav from './SideNav';
+import { Header } from './Header';
+import { CloneUser, DashboardView } from '../types';
+import Dashboard from './Dashboard';
+import DigitalVault from './DigitalVault';
+import Channels from './Channels';
+import VoiceClone from './VoiceClone';
+import TrainingCenter from './TrainingCenter';
+import PricingTiers from './PricingTiers';
+import Settings from './Settings';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
+import { GoogleIcon } from './icons/Icon';
 
 const NavOverlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
     <div 

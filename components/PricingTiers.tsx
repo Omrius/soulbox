@@ -1,10 +1,10 @@
 // components/PricingTiers.tsx
 import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { PlanTier } from '../types.ts';
-import { createCheckoutSession } from '../services/paymentService.ts';
-import { CheckCircleIcon } from './icons/Icon.tsx';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
+import { PlanTier } from '../types';
+import { createCheckoutSession } from '../services/paymentService';
+import { CheckCircleIcon } from './icons/Icon';
 
 interface Tier {
     name: PlanTier;

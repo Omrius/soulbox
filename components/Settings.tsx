@@ -1,10 +1,10 @@
 // components/Settings.tsx
 import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import LanguageSwitcher from './LanguageSwitcher.tsx';
-import { CloneUser } from '../types.ts';
-import { saveTrainingToDrive } from '../services/geminiService.ts';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
+import LanguageSwitcher from './LanguageSwitcher';
+import { CloneUser } from '../types';
+import { saveTrainingToDrive } from '../services/geminiService';
 
 const Settings: React.FC = () => {
     const { user, updateUser, connectGoogleDrive } = useAuth();

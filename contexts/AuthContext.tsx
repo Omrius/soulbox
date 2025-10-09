@@ -1,9 +1,9 @@
 // contexts/AuthContext.tsx
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import { auth, googleProvider } from '../services/firebaseService.ts';
+import { auth, googleProvider } from '../services/firebaseService';
 import { onAuthStateChanged, signInWithPopup, signOut, User as FirebaseUser } from 'firebase/auth';
-import * as authService from '../services/authService.ts';
-import { AppUser, CloneUser, PlanTier } from '../types.ts';
+import * as authService from '../services/authService';
+import { AppUser, CloneUser, PlanTier } from '../types';
 
 interface AuthContextType {
     user: AppUser | null;

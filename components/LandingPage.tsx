@@ -1,7 +1,7 @@
 // components/LandingPage.tsx
 import React, { useState, useEffect, useMemo } from 'react';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import LanguageSwitcher from './LanguageSwitcher.tsx';
+import { useI18n } from '../contexts/I18nContext';
+import LanguageSwitcher from './LanguageSwitcher';
 import { 
     PlayIcon,
     CheckCircleIcon,
@@ -10,9 +10,9 @@ import {
     VaultIcon,
     ShieldIcon,
     MenuIcon
-} from './icons/Icon.tsx';
-import { fetchLegalDocuments } from '../services/authService.ts';
-import { LegalDocuments } from '../types.ts';
+} from './icons/Icon';
+import { fetchLegalDocuments } from '../services/authService';
+import { LegalDocuments } from '../types';
 
 interface LandingPageProps {
     onLoginClick: () => void;

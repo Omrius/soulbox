@@ -1,11 +1,11 @@
 // components/ChatWindow.tsx
 import React, { useState, useEffect, useRef } from 'react';
-import { TrainingData } from '../types.ts';
-import { chatWithClone } from '../services/geminiService.ts';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { SendIcon } from './icons/Icon.tsx';
-import { UserCircleIcon } from './icons/Icon.tsx';
-import { useAuth } from '../contexts/AuthContext.tsx';
+import { TrainingData } from '../types';
+import { chatWithClone } from '../services/geminiService';
+import { useI18n } from '../contexts/I18nContext';
+import { SendIcon } from './icons/Icon';
+import { UserCircleIcon } from './icons/Icon';
+import { useAuth } from '../contexts/AuthContext';
 
 
 interface Message {

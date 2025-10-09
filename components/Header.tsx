@@ -1,8 +1,8 @@
 // components/Header.tsx
 import React from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { MenuIcon, UserCircleIcon } from './icons/Icon.tsx';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
+import { MenuIcon, UserCircleIcon } from './icons/Icon';
 
 interface HeaderProps {
     onMenuClick: () => void;

@@ -1,10 +1,11 @@
 
+
 // components/VoiceClone.tsx
 import React, { useState, useRef, useEffect } from 'react';
-import { uploadVoiceSample } from '../services/geminiService.ts'; // This is a mock
-import { addVoiceClone, textToSpeech } from '../services/elevenLabsService.ts'; // This is the real one
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { MicrophoneIcon, TrashIcon } from './icons/Icon.tsx';
+import { uploadVoiceSample } from '../services/geminiService'; // This is a mock
+import { addVoiceClone, textToSpeech } from '../services/elevenLabsService'; // This is the real one
+import { useI18n } from '../contexts/I18nContext';
+import { MicrophoneIcon, TrashIcon } from './icons/Icon';
 
 // A simple play icon
 const PlayIcon: React.FC<{className?: string}> = ({ className }) => (

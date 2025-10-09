@@ -1,7 +1,8 @@
 
 
+
 import React from 'react';
-import { useI18n } from '../contexts/I18nContext.tsx';
+import { useI18n } from '../contexts/I18nContext';
 
 const AdminVerificationQueue: React.FC = () => {
     const { t } = useI18n();

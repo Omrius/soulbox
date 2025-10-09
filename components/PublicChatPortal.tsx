@@ -1,11 +1,11 @@
 // Renamed from PublicChatPortal.tsx to ProcheDashboard.tsx
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import { ConsulteurUser, ProcheDashboardView, SealedItem, UnlockAttempt } from '../types.ts';
-import { chatWithPublicClone, fetchSealedItems } from '../services/geminiService.ts';
-import { verifySecretAccess } from '../services/authService.ts';
-import { SendIcon, UserCircleIcon, LockIcon, MessageIcon, ShieldCheckIcon, SettingsIcon, UploadCloudIcon, LogoutIcon, MenuIcon } from './icons/Icon.tsx';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
+import { ConsulteurUser, ProcheDashboardView, SealedItem, UnlockAttempt } from '../types';
+import { chatWithPublicClone, fetchSealedItems } from '../services/geminiService';
+import { verifySecretAccess } from '../services/authService';
+import { SendIcon, UserCircleIcon, LockIcon, MessageIcon, ShieldCheckIcon, SettingsIcon, UploadCloudIcon, LogoutIcon, MenuIcon } from './icons/Icon';
 
 
 // --- Sub-Component: Side Navigation ---

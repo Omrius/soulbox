@@ -1,5 +1,5 @@
 // services/authService.ts
-import { AppUser, CloneUser, ConsulteurUser, AdminUser, PlanTier, Beneficiary, UnlockAttempt, Guardian, LegalDocuments, LegalDocumentType } from '../types.ts';
+import { AppUser, CloneUser, ConsulteurUser, AdminUser, PlanTier, Beneficiary, UnlockAttempt, Guardian, LegalDocuments, LegalDocumentType } from '../types';
 
 // --- Mock Data Store ---
 

@@ -1,6 +1,6 @@
 // components/AdminPayments.tsx
 import React from 'react';
-import { useI18n } from '../contexts/I18nContext.tsx';
+import { useI18n } from '../contexts/I18nContext';
 
 const mockPayments = [
     { id: 'pay_1', client: 'Jean Dupont', amount: '19.99€', date: '2023-10-28', status: 'Succès' },

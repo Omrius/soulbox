@@ -1,12 +1,12 @@
 // components/Channels.tsx
 import React, { useState, useEffect } from 'react';
-import { Beneficiary, Guardian } from '../types.ts';
-import { useI18n } from '../contexts/I18nContext.tsx';
+import { Beneficiary, Guardian } from '../types';
+import { useI18n } from '../contexts/I18nContext';
 import { 
     fetchBeneficiaries, addBeneficiary, deleteBeneficiary, sendToken,
     fetchGuardians, addGuardian, updateGuardian, deleteGuardian as deleteGuardianService 
-} from '../services/authService.ts';
-import { PlusIcon, TrashIcon, EnvelopeIcon, DevicePhoneMobileIcon, ClipboardIcon, PencilIcon } from './icons/Icon.tsx';
+} from '../services/authService';
+import { PlusIcon, TrashIcon, EnvelopeIcon, DevicePhoneMobileIcon, ClipboardIcon, PencilIcon } from './icons/Icon';
 
 
 // --- Guardian Modal (Add/Edit) ---

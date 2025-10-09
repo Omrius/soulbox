@@ -1,12 +1,12 @@
 // components/TrainingCenter.tsx
 import React, { useState, useEffect } from 'react';
-import { TrainingData, TrainingDocument, DashboardView, PersonalityQuizQuestion } from '../types.ts';
-import { fetchTrainingData, saveTrainingData, fetchTrainingDocuments, uploadTrainingDocument, deleteTrainingDocument, chatWithClone, saveTrainingToDrive } from '../services/geminiService.ts';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import ChatWindow from './ChatWindow.tsx';
-import { UploadCloudIcon, TrashIcon, PlusIcon } from './icons/Icon.tsx';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { CloneUser } from '../types.ts';
+import { TrainingData, TrainingDocument, DashboardView, PersonalityQuizQuestion } from '../types';
+import { fetchTrainingData, saveTrainingData, fetchTrainingDocuments, uploadTrainingDocument, deleteTrainingDocument, chatWithClone, saveTrainingToDrive } from '../services/geminiService';
+import { useI18n } from '../contexts/I18nContext';
+import ChatWindow from './ChatWindow';
+import { UploadCloudIcon, TrashIcon, PlusIcon } from './icons/Icon';
+import { useAuth } from '../contexts/AuthContext';
+import { CloneUser } from '../types';
 
 // We need the default questions to differentiate them from custom ones.
 const defaultQuestionIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

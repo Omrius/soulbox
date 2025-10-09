@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
-import { SealedItem, TrainingData, TrainingDocument, PublicCloneInfo, Guardian } from '../types.ts';
-import { uploadFileToDrive } from './googleDriveService.ts';
-import { fetchGuardians } from './authService.ts';
+import { SealedItem, TrainingData, TrainingDocument, PublicCloneInfo, Guardian } from '../types';
+import { uploadFileToDrive } from './googleDriveService';
+import { fetchGuardians } from './authService';
 
 // Per guidelines, initialize the SDK and assume process.env.API_KEY is available.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });

@@ -1,10 +1,10 @@
 // components/AdminSettings.tsx
 import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-import { addAdmin, fetchAdmins, changeAdminPassword, uploadLegalDocument, fetchLegalDocuments } from '../services/authService.ts';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import LanguageSwitcher from './LanguageSwitcher.tsx';
-import { AdminUser, LegalDocuments, LegalDocumentType } from '../types.ts';
-import { PlusIcon, UploadCloudIcon } from './icons/Icon.tsx';
+import { addAdmin, fetchAdmins, changeAdminPassword, uploadLegalDocument, fetchLegalDocuments } from '../services/authService';
+import { useI18n } from '../contexts/I18nContext';
+import LanguageSwitcher from './LanguageSwitcher';
+import { AdminUser, LegalDocuments, LegalDocumentType } from '../types';
+import { PlusIcon, UploadCloudIcon } from './icons/Icon';
 
 const AdminSettings: React.FC = () => {
     const { t } = useI18n();

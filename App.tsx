@@ -1,19 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
 // Fix: Add .tsx extension to imports
-import { useAuth } from './contexts/AuthContext.tsx';
-import { useI18n } from './contexts/I18nContext.tsx';
+import { useAuth } from './contexts/AuthContext';
+import { useI18n } from './contexts/I18nContext';
 // Fix: Corrected import paths to be relative
 // Fix: Add .tsx extension to component imports
-import LandingPage from './components/LandingPage.tsx';
+import LandingPage from './components/LandingPage';
 // Fix: Add .tsx extension to component imports
-import LoginPage from './components/LoginPage.tsx';
+import LoginPage from './components/LoginPage';
 // Fix: Add .tsx extension to component imports
-import DashboardLayout from './components/DashboardLayout.tsx';
+import DashboardLayout from './components/DashboardLayout';
 // Fix: Add .tsx extension to component imports
-import ProcheDashboard from './components/PublicChatPortal.tsx';
+import ProcheDashboard from './components/PublicChatPortal';
 // Fix: Add .tsx extension to component imports
-import AdminDashboardLayout from './components/AdminDashboardLayout.tsx';
+import AdminDashboardLayout from './components/AdminDashboardLayout';
 
 const App: React.FC = () => {
   const { user, isLoading: isAuthLoading } = useAuth();

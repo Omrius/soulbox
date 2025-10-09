@@ -1,10 +1,10 @@
 // components/LoginPage.tsx
 import React, { useState, FormEvent, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { useI18n } from '../contexts/I18nContext.tsx';
-import LanguageSwitcher from './LanguageSwitcher.tsx';
-import { CloneUser } from '../types.ts';
-import { GoogleIcon, UserCircleIcon, UsersIcon, ShieldCheckIcon } from './icons/Icon.tsx';
+import { useAuth } from '../contexts/AuthContext';
+import { useI18n } from '../contexts/I18nContext';
+import LanguageSwitcher from './LanguageSwitcher';
+import { CloneUser } from '../types';
+import { GoogleIcon, UserCircleIcon, UsersIcon, ShieldCheckIcon } from './icons/Icon';
 
 type View = 'clone' | 'consulteur' | 'admin';
 type CloneForm = 'login' | 'register' | 'verify' | 'forgotPassword';
