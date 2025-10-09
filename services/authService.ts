@@ -1,5 +1,5 @@
 // services/authService.ts
-import { AppUser, CloneUser, ConsulteurUser, AdminUser, PlanTier, Beneficiary, UnlockAttempt, Guardian } from '../types.ts';
+import { AppUser, CloneUser, ConsulteurUser, AdminUser, PlanTier, Beneficiary, UnlockAttempt, Guardian, LegalDocuments, LegalDocumentType } from '../types.ts';
 
 // --- Mock Data Store ---
 
@@ -42,6 +42,9 @@ let mockGuardians: Guardian[] = [
     { id: 'g_2', name: 'Bob Martin', email: 'bob.m@example.com' },
     { id: 'g_3', name: 'Charlie Durand', email: 'charlie.d@example.com' },
 ];
+
+// NEW: Mock store for legal documents
+let mockLegalDocuments: LegalDocuments = {};
 
 
 // --- Mock API Functions ---
@@ -180,6 +183,25 @@ export const addAdmin = async (data: { name: string; permissions: AdminUser['per
     });
 };
 
+export const changeAdminPassword = async (currentPassword: string, newPassword: string): Promise<{ success: boolean; message: string; }> => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            // In a real app, you would verify the current password against a hash in the database.
+            // For this mock, we'll just check against the known password 'admin'.
+            if (currentPassword !== 'admin') {
+                return reject(new Error("Le mot de passe actuel est incorrect."));
+            }
+            if (newPassword.length < 6) {
+                return reject(new Error("Le nouveau mot de passe doit contenir au moins 6 caractères."));
+            }
+            
+            // Here you would hash the newPassword and update it in the database.
+            console.log("Admin password change successful (simulated).");
+            resolve({ success: true, message: "Mot de passe changé avec succès !" });
+        }, 1000);
+    });
+};
+
 
 export const fetchBeneficiaries = async (): Promise<Beneficiary[]> => {
     return new Promise(resolve => setTimeout(() => resolve([...mockBeneficiaries]), 500));
@@ -284,5 +306,24 @@ export const deleteGuardian = async (id: string): Promise<void> => {
             mockGuardians = mockGuardians.filter(g => g.id !== id);
             resolve();
         }, 500);
+    });
+};
+
+// --- NEW: Legal Document Management ---
+export const fetchLegalDocuments = async (): Promise<LegalDocuments> => {
+    return new Promise(resolve => setTimeout(() => resolve({ ...mockLegalDocuments }), 500));
+};
+
+export const uploadLegalDocument = async (docType: LegalDocumentType, file: File): Promise<{ fileName: string, url: string }> => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            // In a real app, this would upload to a secure storage and return a permanent URL.
+            // For this mock, we use a temporary blob URL.
+            const url = URL.createObjectURL(file);
+            const newDoc = { fileName: file.name, url };
+            mockLegalDocuments[docType] = newDoc;
+            console.log(`Uploaded ${file.name} for ${docType}. URL: ${url}`);
+            resolve(newDoc);
+        }, 1500);
     });
 };

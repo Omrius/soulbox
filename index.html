@@ -7,56 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class', // Allows for light/dark mode toggling
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            // Original Palette (kept for dashboard consistency)
-            'brand-dark': '#0F172A',
-            'brand-secondary': '#1E293B',
-            'brand-tertiary': '#334155',
-            'brand-accent': '#38BDF8',
-            'brand-light-bg': '#F8FAFC',
-            'brand-light-card': '#FFFFFF',
-            // New Landing Page Palette
-            'deep-blue': '#0B2340',
-            'gold': '#D9A441',
-            'soft-violet': '#7B5AA8',
-            'off-white': '#F7F8FA',
-          },
-        },
-      },
-    }
-  </script>
-  <style>
-    /* A more polished scrollbar for better aesthetics */
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #cbd5e1; /* light gray */
-        border-radius: 10px;
-    }
-    .dark ::-webkit-scrollbar-thumb {
-        background: #475569; /* darker gray */
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-    }
-    .dark ::-webkit-scrollbar-thumb:hover {
-        background: #64748b;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 <script type="importmap">
 {
   "imports": {
@@ -71,7 +22,7 @@
 }
 </script>
 </head>
-<body class="h-full bg-off-white dark:bg-deep-blue antialiased font-sans">
+<body class="h-full">
   <div id="root" class="h-full"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

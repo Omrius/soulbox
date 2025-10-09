@@ -28,9 +28,6 @@ const NavLink: React.FC<{
     onClick: () => void;
 }> = ({ icon, label, view, currentView, onClick }) => {
     const isActive = currentView === view;
-    const baseClasses = "flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200";
-    const activeClasses = "bg-brand-accent text-white";
-    const inactiveClasses = "text-gray-400 hover:bg-brand-tertiary hover:text-white";
     return (
         <a
             href="#"
@@ -38,9 +35,9 @@ const NavLink: React.FC<{
                 e.preventDefault();
                 onClick();
             }}
-            className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+            className={`sidenav-link ${isActive ? 'active' : ''}`}
         >
-            <span className="mr-3">{icon}</span>
+            {icon}
             {label}
         </a>
     );
@@ -56,58 +53,51 @@ const AdminSideNav: React.FC<AdminSideNavProps> = ({ currentView, setCurrentView
     };
 
     const navItems = [
-        { view: AdminDashboardView.OVERVIEW, label: t('admin.navOverview'), icon: <HomeIcon className="w-6 h-6" /> },
-        { view: AdminDashboardView.CLIENTS, label: t('admin.navClients'), icon: <UserGroupIcon className="w-6 h-6" /> },
-        { view: AdminDashboardView.VERIFICATIONS, label: t('admin.navVerifications'), icon: <ShieldCheckIcon className="w-6 h-6" /> },
-        { view: AdminDashboardView.PAYMENTS, label: t('admin.navPayments'), icon: <BillingIcon className="w-6 h-6" /> },
-        { view: AdminDashboardView.SETTINGS, label: t('common.settings'), icon: <SettingsIcon className="w-6 h-6" /> },
+        { view: AdminDashboardView.OVERVIEW, label: t('admin.navOverview'), icon: <HomeIcon /> },
+        { view: AdminDashboardView.CLIENTS, label: t('admin.navClients'), icon: <UserGroupIcon /> },
+        { view: AdminDashboardView.VERIFICATIONS, label: t('admin.navVerifications'), icon: <ShieldCheckIcon /> },
+        { view: AdminDashboardView.PAYMENTS, label: t('admin.navPayments'), icon: <BillingIcon /> },
+        { view: AdminDashboardView.SETTINGS, label: t('common.settings'), icon: <SettingsIcon /> },
     ];
 
-    const navClasses = `
-        fixed inset-y-0 left-0 z-50 w-64 bg-brand-secondary text-white transform
-        transition-transform duration-300 ease-in-out
-        md:relative md:translate-x-0
-        ${isMobileNavOpen ? 'translate-x-0' : '-translate-x-full'}
-    `;
+    const navClasses = `sidenav ${isMobileNavOpen ? 'open' : ''}`;
 
     return (
         <nav className={navClasses}>
-            <div className="flex flex-col h-full">
-                <div className="flex items-center justify-center h-20 border-b border-brand-tertiary">
-                    <h1 className="text-2xl font-bold text-white">SoulBox <span className="text-red-500">{t('admin.title')}</span></h1>
-                </div>
-                <div className="flex-1 p-4 space-y-2 overflow-y-auto">
-                    {navItems.map(item => (
-                        <NavLink
-                            key={item.view}
-                            icon={item.icon}
-                            label={item.label}
-                            view={item.view}
-                            currentView={currentView}
-                            onClick={() => handleLinkClick(item.view)}
-                        />
-                    ))}
-                </div>
-                <div className="p-4 border-t border-brand-tertiary">
-                    <div className="flex items-center mb-4">
-                        {user?.avatarUrl ? (
-                            <img src={user.avatarUrl} alt="User Avatar" className="w-10 h-10 mr-3 rounded-full object-cover" />
-                        ) : (
-                            <UserCircleIcon className="w-10 h-10 mr-3 text-gray-400"/>
-                        )}
-                        <div>
-                            <p className="font-semibold text-white">{user?.name}</p>
-                            <p className="text-xs text-gray-400">{t('loginPage.adminAccess')}</p>
-                        </div>
+            <div className="sidenav-header">
+                <h1 className="sidenav-title">SoulBox <span style={{color: 'var(--color-danger)'}}>{t('admin.title')}</span></h1>
+            </div>
+            <div className="sidenav-links">
+                {navItems.map(item => (
+                    <NavLink
+                        key={item.view}
+                        icon={item.icon}
+                        label={item.label}
+                        view={item.view}
+                        currentView={currentView}
+                        onClick={() => handleLinkClick(item.view)}
+                    />
+                ))}
+            </div>
+            <div className="sidenav-footer">
+                <div className="sidenav-user">
+                    {user?.avatarUrl ? (
+                        <img src={user.avatarUrl} alt="User Avatar" className="sidenav-user-avatar" />
+                    ) : (
+                        <UserCircleIcon className="sidenav-user-icon"/>
+                    )}
+                    <div>
+                        <p className="sidenav-user-name">{user?.name}</p>
+                        <p className="sidenav-user-email">{t('loginPage.adminAccess')}</p>
                     </div>
-                    <button
-                        onClick={logout}
-                        className="w-full flex items-center justify-center px-4 py-3 text-sm font-medium rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-200"
-                    >
-                        <LogoutIcon className="w-5 h-5 mr-2" />
-                        {t('common.logout')}
-                    </button>
                 </div>
+                <button
+                    onClick={logout}
+                    className="btn btn-danger sidenav-logout-btn"
+                >
+                    <LogoutIcon />
+                    {t('common.logout')}
+                </button>
             </div>
         </nav>
     );

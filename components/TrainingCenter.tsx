@@ -1,13 +1,15 @@
-
 // components/TrainingCenter.tsx
 import React, { useState, useEffect } from 'react';
-import { TrainingData, TrainingDocument, DashboardView } from '../types.ts';
+import { TrainingData, TrainingDocument, DashboardView, PersonalityQuizQuestion } from '../types.ts';
 import { fetchTrainingData, saveTrainingData, fetchTrainingDocuments, uploadTrainingDocument, deleteTrainingDocument, chatWithClone, saveTrainingToDrive } from '../services/geminiService.ts';
 import { useI18n } from '../contexts/I18nContext.tsx';
 import ChatWindow from './ChatWindow.tsx';
-import { UploadCloudIcon, TrashIcon } from './icons/Icon.tsx';
+import { UploadCloudIcon, TrashIcon, PlusIcon } from './icons/Icon.tsx';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { CloneUser } from '../types.ts';
+
+// We need the default questions to differentiate them from custom ones.
+const defaultQuestionIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }> = ({ setCurrentView }) => {
     const { user } = useAuth();
@@ -19,6 +21,9 @@ const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }
     const [isSaving, setIsSaving] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [isTesting, setIsTesting] = useState(false);
+    const [uploadError, setUploadError] = useState<string | null>(null);
+    const [fileToUpload, setFileToUpload] = useState<File | null>(null);
+
 
     useEffect(() => {
         const loadData = async () => {
@@ -39,12 +44,33 @@ const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }
         }
     };
     
-    const handleQuizChange = (id: number, answer: string) => {
+    const handleQuizChange = (id: number, field: 'question' | 'answer', value: string) => {
         if (trainingData) {
-            const updatedQuiz = trainingData.personalityQuiz.map(q => q.id === id ? {...q, answer} : q);
+            const updatedQuiz = trainingData.personalityQuiz.map(q => 
+                q.id === id ? {...q, [field]: value} : q
+            );
             handleDataChange('personalityQuiz', updatedQuiz);
         }
-    }
+    };
+
+    const handleAddCustomQuestion = () => {
+        if (trainingData) {
+            const newQuestion: PersonalityQuizQuestion = {
+                id: Date.now(), // Use timestamp for a unique temporary ID
+                question: '',
+                answer: ''
+            };
+            const updatedQuiz = [...trainingData.personalityQuiz, newQuestion];
+            handleDataChange('personalityQuiz', updatedQuiz);
+        }
+    };
+
+    const handleRemoveCustomQuestion = (id: number) => {
+        if (trainingData) {
+            const updatedQuiz = trainingData.personalityQuiz.filter(q => q.id !== id);
+            handleDataChange('personalityQuiz', updatedQuiz);
+        }
+    };
 
     const handleSave = async () => {
         if (!trainingData || !user) return;
@@ -59,14 +85,37 @@ const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }
         setIsSaving(false);
     };
     
+    const attemptUpload = async (file: File) => {
+        if (!trainingData) return;
+        setIsUploading(true);
+        setUploadError(null);
+        try {
+            const newDoc = await uploadTrainingDocument(file);
+            setDocuments(prev => [...prev, newDoc]);
+            setFileToUpload(null); // Clear file on success
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Upload failed";
+            setUploadError(message);
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (!file || !trainingData) return;
-        setIsUploading(true);
-        const newDoc = await uploadTrainingDocument(file);
-        setDocuments(prev => [...prev, newDoc]);
-        setIsUploading(false);
-    }
+        if (file) {
+            setFileToUpload(file);
+            await attemptUpload(file);
+        }
+        // Reset file input to allow re-selecting the same file if needed
+        e.target.value = '';
+    };
+
+    const handleRetryUpload = () => {
+        if (fileToUpload) {
+            attemptUpload(fileToUpload);
+        }
+    };
     
     const handleDeleteDoc = async (docId: string) => {
         await deleteTrainingDocument(docId);
@@ -79,66 +128,116 @@ const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }
     if (isTesting) {
         return <ChatWindow context={trainingData} onBack={() => setIsTesting(false)} />;
     }
+    
+    const defaultQuestions = trainingData.personalityQuiz.filter(q => defaultQuestionIds.includes(q.id));
+    const customQuestions = trainingData.personalityQuiz.filter(q => !defaultQuestionIds.includes(q.id));
 
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('trainingCenter.title')}</h1>
-            <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
+            <h1 className="page-title">{t('trainingCenter.title')}</h1>
+            <p className="page-subheadline">
                 {t('trainingCenter.subheadline')}
             </p>
 
-            <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-8">
+            <div className="training-grid">
+                <div className="training-main-col">
                      {/* Personality Quiz */}
-                    <div className="bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-md">
-                        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('trainingCenter.personalityQuiz')}</h2>
-                         <p className="mb-6 text-gray-600 dark:text-gray-400">{t('trainingCenter.quizDesc')}</p>
-                        <div className="space-y-4">
-                            {trainingData.personalityQuiz.map(q => (
+                    <div className="card">
+                        <h2 className="h2" style={{marginBottom: '1rem'}}>{t('trainingCenter.personalityQuiz')}</h2>
+                         <p style={{marginBottom: '1.5rem', color: 'var(--color-text-muted)'}}>{t('trainingCenter.quizDesc')}</p>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                            {defaultQuestions.map(q => (
                                 <div key={q.id}>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{q.question}</label>
+                                    <label className="form-label" style={{fontSize: '0.875rem'}}>{q.question}</label>
                                     <textarea
                                         rows={2}
                                         value={q.answer}
-                                        onChange={(e) => handleQuizChange(q.id, e.target.value)}
-                                        className="mt-1 block w-full rounded-md bg-gray-100 dark:bg-brand-tertiary border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 dark:text-white"
+                                        onChange={(e) => handleQuizChange(q.id, 'answer', e.target.value)}
+                                        className="form-textarea"
                                     />
                                 </div>
                             ))}
                         </div>
+                        
+                        <div className="divider" style={{marginTop: '1.5rem', paddingTop: '1.5rem'}}>
+                             <h3 className="h3" style={{marginBottom: '1rem'}}>{t('trainingCenter.customQuestionsTitle')}</h3>
+                             <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                                {customQuestions.map(q => (
+                                    <div key={q.id} className="custom-question-box">
+                                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem'}}>
+                                            <label className="form-label" style={{fontSize: '0.875rem'}}>{t('trainingCenter.customQuestionLabel')}</label>
+                                            <button onClick={() => handleRemoveCustomQuestion(q.id)} style={{color: 'var(--color-danger)', background: 'none', border: 'none', cursor: 'pointer'}}>
+                                                <TrashIcon className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder={t('trainingCenter.customQuestionPlaceholder')}
+                                            value={q.question}
+                                            onChange={(e) => handleQuizChange(q.id, 'question', e.target.value)}
+                                            className="form-input"
+                                            style={{marginBottom: '0.5rem'}}
+                                        />
+                                         <textarea
+                                            rows={2}
+                                            placeholder={t('trainingCenter.customAnswerPlaceholder')}
+                                            value={q.answer}
+                                            onChange={(e) => handleQuizChange(q.id, 'answer', e.target.value)}
+                                            className="form-textarea"
+                                        />
+                                    </div>
+                                ))}
+                             </div>
+                             <button onClick={handleAddCustomQuestion} style={{marginTop: '1rem', display: 'flex', alignItems: 'center', fontSize: '0.875rem', fontWeight: 500, color: 'var(--brand-accent)', background: 'none', border: 'none', cursor: 'pointer'}}>
+                                <PlusIcon className="w-4 h-4 mr-2" />
+                                {t('trainingCenter.addQuestion')}
+                             </button>
+                        </div>
                     </div>
                 </div>
 
-                <div className="space-y-8">
-                    {/* General Traits */}
-                    <div className="bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-md">
-                         <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('trainingCenter.knowledgeDocs')}</h2>
-                         <div className="p-4 border-2 border-dashed rounded-lg text-center">
-                            <UploadCloudIcon className="mx-auto h-12 w-12 text-gray-400"/>
-                            <label htmlFor="file-upload" className="relative cursor-pointer bg-white dark:bg-brand-secondary rounded-md font-medium text-brand-accent hover:text-opacity-80">
-                                <span>{t('trainingCenter.uploadFile')}</span>
-                                <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileUpload}/>
+                <div className="training-side-col">
+                    {/* Knowledge Docs */}
+                    <div className="card">
+                         <h2 className="h2" style={{marginBottom: '1rem'}}>{t('trainingCenter.knowledgeDocs')}</h2>
+                         <div className="upload-box">
+                            <UploadCloudIcon className="upload-box-icon"/>
+                            <label htmlFor="file-upload" className="upload-label">
+                                <span>{isUploading ? t('trainingCenter.uploading') : t('trainingCenter.uploadFile')}</span>
+                                <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileUpload} disabled={isUploading}/>
                             </label>
-                            <p className="text-xs text-gray-500">{t('trainingCenter.fileTypes')}</p>
+                            <p className="upload-hint">{t('trainingCenter.fileTypes')}</p>
                          </div>
-                         {isUploading && <p className="text-sm mt-2">{t('trainingCenter.uploading')}</p>}
-                         <ul className="mt-4 space-y-2">
+                         {uploadError && (
+                             <div className="error-box-inline">
+                                <p style={{margin: 0}}>{uploadError}</p>
+                                <button
+                                    onClick={handleRetryUpload}
+                                    disabled={isUploading}
+                                    className="btn btn-danger"
+                                    style={{fontSize: '0.875rem', padding: '0.25rem 0.75rem'}}
+                                >
+                                    {isUploading ? t('common.loading') : t('trainingCenter.retryButton')}
+                                </button>
+                            </div>
+                         )}
+                         <ul className="doc-list">
                             {documents.map(doc => (
-                                <li key={doc.id} className="flex items-center justify-between text-sm p-2 bg-gray-50 dark:bg-brand-tertiary rounded">
-                                    <span className="truncate text-gray-700 dark:text-gray-300">{doc.name}</span>
-                                    <button onClick={() => handleDeleteDoc(doc.id)}><TrashIcon className="w-4 h-4 text-red-500 hover:text-red-700"/></button>
+                                <li key={doc.id} className="doc-list-item">
+                                    <span>{doc.name}</span>
+                                    <button onClick={() => handleDeleteDoc(doc.id)}><TrashIcon className="trash-icon"/></button>
                                 </li>
                             ))}
                          </ul>
                     </div>
                     {/* Actions */}
-                    <div className="bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-md">
-                        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('trainingCenter.actions')}</h2>
-                        <div className="space-y-4">
-                            <button onClick={handleSave} disabled={isSaving} className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50">
+                    <div className="card">
+                        <h2 className="h2" style={{marginBottom: '1rem'}}>{t('trainingCenter.actions')}</h2>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                            <button onClick={handleSave} disabled={isSaving} className="btn btn-info w-full" style={{padding: '0.75rem 0'}}>
                                 {isSaving ? t('trainingCenter.savingButton') : t('trainingCenter.saveButton')}
                             </button>
-                            <button onClick={() => setIsTesting(true)} className="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600">
+                            <button onClick={() => setIsTesting(true)} className="btn btn-success w-full" style={{padding: '0.75rem 0'}}>
                                 {t('trainingCenter.testButton')}
                             </button>
                         </div>

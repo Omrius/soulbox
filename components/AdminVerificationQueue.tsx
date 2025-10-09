@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { useI18n } from '../contexts/I18nContext.tsx';
 
@@ -9,12 +10,12 @@ const AdminVerificationQueue: React.FC = () => {
     // allowing an admin to view submitted documents and approve/reject access.
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('admin.verificationsTitle')}</h1>
-            <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
+            <h1 className="page-title">{t('admin.verificationsTitle')}</h1>
+            <p className="page-subheadline">
                 {t('admin.verificationsDesc')}
             </p>
-            <div className="mt-8 bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-sm">
-                 <p className="text-gray-500 dark:text-gray-400">{t('admin.verificationsPlaceholder')}</p>
+            <div className="card" style={{marginTop: '2rem'}}>
+                 <p style={{color: 'var(--color-text-muted)'}}>{t('admin.verificationsPlaceholder')}</p>
             </div>
         </div>
     );

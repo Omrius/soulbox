@@ -139,42 +139,42 @@ const LoginPage: React.FC<{ initialView: View }> = ({ initialView }) => {
     const renderCloneForm = () => (
         <>
             {cloneForm === 'login' && (
-                <form onSubmit={handleCloneLogin} className="space-y-4">
-                    <input type="email" placeholder={t('loginPage.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <input type="password" placeholder={t('loginPage.passwordPlaceholder')} value={password} onChange={e => setPassword(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <button type="submit" disabled={isLoading} className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50">{isLoading ? t('common.loading') : t('loginPage.loginButton')}</button>
-                    <div className="text-center text-sm">
-                        <button type="button" onClick={() => { setCloneForm('forgotPassword'); setError(''); setForgotPasswordMessage(''); }} className="font-semibold text-brand-accent hover:underline">{t('loginPage.forgotPassword')}</button>
+                <form onSubmit={handleCloneLogin}>
+                    <input type="email" placeholder={t('loginPage.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} required className="form-input"/>
+                    <input type="password" placeholder={t('loginPage.passwordPlaceholder')} value={password} onChange={e => setPassword(e.target.value)} required className="form-input"/>
+                    <button type="submit" disabled={isLoading} className="btn btn-primary w-full">{isLoading ? t('common.loading') : t('loginPage.loginButton')}</button>
+                    <div style={{textAlign: 'center', fontSize: '0.875rem'}}>
+                        <button type="button" onClick={() => { setCloneForm('forgotPassword'); setError(''); setForgotPasswordMessage(''); }} style={{fontWeight: 600, color: 'var(--brand-accent)', background: 'none', border: 'none', cursor: 'pointer'}}>{t('loginPage.forgotPassword')}</button>
                     </div>
-                    <p className="text-center text-sm">{t('loginPage.noAccount')} <button type="button" onClick={() => setCloneForm('register')} className="font-semibold text-brand-accent hover:underline">{t('loginPage.register')}</button></p>
-                    <div className="relative my-4"><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-300 dark:border-gray-600"></div></div><div className="relative flex justify-center text-sm"><span className="px-2 bg-white dark:bg-brand-secondary text-gray-500 dark:text-gray-400">{t('common.or')}</span></div></div>
-                    <button type="button" onClick={signInWithGoogle} disabled={isLoading} className="w-full flex items-center justify-center bg-white dark:bg-gray-800 text-gray-700 dark:text-white font-semibold py-3 px-4 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"><GoogleIcon className="w-6 h-6 mr-3"/>{t('loginPage.googleLogin')}</button>
+                    <p style={{textAlign: 'center', fontSize: '0.875rem'}}>{t('loginPage.noAccount')} <button type="button" onClick={() => setCloneForm('register')} style={{fontWeight: 600, color: 'var(--brand-accent)', background: 'none', border: 'none', cursor: 'pointer'}}>{t('loginPage.register')}</button></p>
+                    <div className="form-divider"><div className="form-divider-line"></div><div className="form-divider-text"><span>{t('common.or')}</span></div></div>
+                    <button type="button" onClick={signInWithGoogle} disabled={isLoading} className="login-google-btn"><GoogleIcon/>{t('loginPage.googleLogin')}</button>
                 </form>
             )}
             {cloneForm === 'register' && (
-                <form onSubmit={handleRegister} className="space-y-4">
-                    <input type="text" placeholder={t('loginPage.fullNamePlaceholder')} value={name} onChange={e => setName(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <input type="email" placeholder={t('loginPage.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <input type="password" placeholder={t('loginPage.passwordPlaceholder')} value={password} onChange={e => setPassword(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <button type="submit" disabled={isLoading} className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50">{isLoading ? t('common.loading') : t('loginPage.createAccountButton')}</button>
-                    <p className="text-center text-sm">{t('loginPage.haveAccount')} <button type="button" onClick={() => setCloneForm('login')} className="font-semibold text-brand-accent hover:underline">{t('loginPage.loginButton')}</button></p>
+                <form onSubmit={handleRegister}>
+                    <input type="text" placeholder={t('loginPage.fullNamePlaceholder')} value={name} onChange={e => setName(e.target.value)} required className="form-input"/>
+                    <input type="email" placeholder={t('loginPage.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} required className="form-input"/>
+                    <input type="password" placeholder={t('loginPage.passwordPlaceholder')} value={password} onChange={e => setPassword(e.target.value)} required className="form-input"/>
+                    <button type="submit" disabled={isLoading} className="btn btn-primary w-full">{isLoading ? t('common.loading') : t('loginPage.createAccountButton')}</button>
+                    <p style={{textAlign: 'center', fontSize: '0.875rem'}}>{t('loginPage.haveAccount')} <button type="button" onClick={() => setCloneForm('login')} style={{fontWeight: 600, color: 'var(--brand-accent)', background: 'none', border: 'none', cursor: 'pointer'}}>{t('loginPage.loginButton')}</button></p>
                 </form>
             )}
             {cloneForm === 'verify' && (
-                <form onSubmit={handleVerifyCode} className="space-y-4">
-                    <p className="text-center text-gray-700 dark:text-gray-300">{t('loginPage.verificationMessage', { message: verificationMessage })}</p>
-                    <input type="text" placeholder={t('loginPage.verificationCodePlaceholder')} value={code} onChange={e => setCode(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <button type="submit" disabled={isLoading} className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50">{isLoading ? t('common.loading') : t('loginPage.verifyAndLoginButton')}</button>
+                <form onSubmit={handleVerifyCode}>
+                    <p style={{textAlign: 'center'}}>{t('loginPage.verificationMessage', { message: verificationMessage })}</p>
+                    <input type="text" placeholder={t('loginPage.verificationCodePlaceholder')} value={code} onChange={e => setCode(e.target.value)} required className="form-input"/>
+                    <button type="submit" disabled={isLoading} className="btn btn-primary w-full">{isLoading ? t('common.loading') : t('loginPage.verifyAndLoginButton')}</button>
                 </form>
             )}
             {cloneForm === 'forgotPassword' && (
-                <form onSubmit={handleForgotPassword} className="space-y-4">
-                    <h3 className="text-lg font-semibold text-center text-gray-800 dark:text-gray-200">{t('loginPage.resetPasswordTitle')}</h3>
-                    <p className="text-center text-sm text-gray-600 dark:text-gray-400">{t('loginPage.resetPasswordInstructions')}</p>
-                    <input type="email" placeholder={t('loginPage.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    {forgotPasswordMessage && <p className="text-green-600 text-sm text-center bg-green-100 dark:bg-green-900/50 p-3 rounded-lg">{forgotPasswordMessage}</p>}
-                    <button type="submit" disabled={isLoading} className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50">{isLoading ? t('common.loading') : t('loginPage.sendInstructionsButton')}</button>
-                    <p className="text-center text-sm"><button type="button" onClick={() => setCloneForm('login')} className="font-semibold text-brand-accent hover:underline">{t('loginPage.backToLogin')}</button></p>
+                <form onSubmit={handleForgotPassword}>
+                    <h3 style={{fontSize: '1.125rem', fontWeight: 600, textAlign: 'center'}}>{t('loginPage.resetPasswordTitle')}</h3>
+                    <p style={{textAlign: 'center', fontSize: '0.875rem'}}>{t('loginPage.resetPasswordInstructions')}</p>
+                    <input type="email" placeholder={t('loginPage.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} required className="form-input"/>
+                    {forgotPasswordMessage && <p style={{color: 'var(--color-success-text)', fontSize: '0.875rem', textAlign: 'center', backgroundColor: 'var(--color-success-bg)', padding: '0.75rem', borderRadius: 'var(--rounded-lg)'}}>{forgotPasswordMessage}</p>}
+                    <button type="submit" disabled={isLoading} className="btn btn-primary w-full">{isLoading ? t('common.loading') : t('loginPage.sendInstructionsButton')}</button>
+                    <p style={{textAlign: 'center', fontSize: '0.875rem'}}><button type="button" onClick={() => setCloneForm('login')} style={{fontWeight: 600, color: 'var(--brand-accent)', background: 'none', border: 'none', cursor: 'pointer'}}>{t('loginPage.backToLogin')}</button></p>
                 </form>
             )}
         </>
@@ -183,104 +183,93 @@ const LoginPage: React.FC<{ initialView: View }> = ({ initialView }) => {
     const renderConsulteurForm = () => (
         <>
             {procheStep === 1 ? (
-                <form onSubmit={handleProcheIdentity} className="space-y-4">
-                    <input type="text" placeholder={t('loginPage.procheFullNamePlaceholder')} value={procheName} onChange={e => setProcheName(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <input type="tel" placeholder={t('loginPage.prochePhonePlaceholder')} value={phone} onChange={e => setPhone(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <button type="submit" disabled={isLoading} className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50">{isLoading ? t('common.loading') : t('loginPage.continueButton')}</button>
+                <form onSubmit={handleProcheIdentity}>
+                    <input type="text" placeholder={t('loginPage.procheFullNamePlaceholder')} value={procheName} onChange={e => setProcheName(e.target.value)} required className="form-input"/>
+                    <input type="tel" placeholder={t('loginPage.prochePhonePlaceholder')} value={phone} onChange={e => setPhone(e.target.value)} required className="form-input"/>
+                    <button type="submit" disabled={isLoading} className="btn btn-primary w-full">{isLoading ? t('common.loading') : t('loginPage.continueButton')}</button>
                 </form>
             ) : (
-                <form onSubmit={handleProcheToken} className="space-y-4">
-                    <p className="text-center text-gray-700 dark:text-gray-300">{t('loginPage.procheTokenPrompt')}</p>
-                    <input type="text" placeholder={t('loginPage.procheTokenPlaceholder')} value={token} onChange={e => setToken(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-accent"/>
-                    <button type="submit" disabled={isLoading} className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors disabled:opacity-50">{isLoading ? t('common.loading') : t('loginPage.procheAccessButton')}</button>
+                <form onSubmit={handleProcheToken}>
+                    <p style={{textAlign: 'center'}}>{t('loginPage.procheTokenPrompt')}</p>
+                    <input type="text" placeholder={t('loginPage.procheTokenPlaceholder')} value={token} onChange={e => setToken(e.target.value)} required className="form-input"/>
+                    <button type="submit" disabled={isLoading} className="btn btn-primary w-full">{isLoading ? t('common.loading') : t('loginPage.procheAccessButton')}</button>
                 </form>
             )}
         </>
     );
     
     const renderAdminForm = () => (
-        <form onSubmit={handleAdminLogin} className="space-y-4">
-            <input type="email" placeholder={t('loginPage.adminEmailPlaceholder')} value={adminEmail} onChange={e => setAdminEmail(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500"/>
-            <input type="password" placeholder={t('loginPage.adminPasswordPlaceholder')} value={adminPassword} onChange={e => setAdminPassword(e.target.value)} required className="w-full px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500"/>
-            <button type="submit" disabled={isLoading} className="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50">{isLoading ? t('common.loading') : t('loginPage.adminLoginButton')}</button>
+        <form onSubmit={handleAdminLogin}>
+            <input type="email" placeholder={t('loginPage.adminEmailPlaceholder')} value={adminEmail} onChange={e => setAdminEmail(e.target.value)} required className="form-input"/>
+            <input type="password" placeholder={t('loginPage.adminPasswordPlaceholder')} value={adminPassword} onChange={e => setAdminPassword(e.target.value)} required className="form-input"/>
+            <button type="submit" disabled={isLoading} className="btn btn-danger w-full">{isLoading ? t('common.loading') : t('loginPage.adminLoginButton')}</button>
         </form>
     );
     
     const TabButton: React.FC<{view: View, title: string, description: string, icon: React.ReactNode}> = ({view, title, description, icon}) => (
         <button
             onClick={() => handleViewChange(view)}
-            className={`w-1/2 p-4 text-center transition-colors duration-300 ${activeView === view ? 'bg-white dark:bg-brand-secondary' : 'bg-gray-100/50 dark:bg-brand-secondary/50 hover:bg-gray-200/50 dark:hover:bg-brand-tertiary/50'}`}
+            className={`login-tab ${activeView === view ? 'active' : ''}`}
         >
-            <div className={`mx-auto mb-2 ${activeView === view ? 'text-brand-accent' : 'text-gray-400'}`}>{icon}</div>
-            <h3 className="font-bold text-lg text-gray-900 dark:text-white">{title}</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400">{description}</p>
+            {icon}
+            <h3 className="login-tab-title">{title}</h3>
+            <p className="login-tab-desc">{description}</p>
         </button>
     );
 
     return (
-        <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-hidden relative text-white">
-            {/* Dynamic Background */}
+        <div className="login-page">
             {backgroundImages.map((img, index) => (
                 <div
                     key={index}
-                    className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+                    className="login-bg"
                     style={{ 
                         backgroundImage: `url(${img})`,
                         opacity: index === currentBgIndex ? 1 : 0,
-                        zIndex: 1
                     }}
                 />
             ))}
-            <div className="absolute inset-0 bg-black/50 z-10"></div>
+            <div className="login-overlay"></div>
             
-             <LanguageSwitcher className="absolute top-4 right-4 z-30" />
+             <LanguageSwitcher style={{position: 'absolute', top: '1rem', right: '1rem', zIndex: 30}} />
             
-            <div className="relative z-20 flex flex-col items-center justify-center h-full w-full">
+            <div className="login-content">
                 <a 
                   href="/"
-                  className="text-6xl font-bold text-white mb-8 drop-shadow-lg cursor-pointer transition-transform hover:scale-105"
+                  className="login-title"
                 >
                     SoulBox
                 </a>
                 
                 <div 
-                    className={`
-                        w-full max-w-md transition-all duration-700 ease-in-out
-                        ${isLoginVisible ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
-                    `}
+                    className={`login-box-wrapper ${isLoginVisible ? 'visible' : 'hidden'}`}
                 >
-                     {error && <p className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 w-full text-center" role="alert">{error}</p>}
+                     {error && <p className="error-box" style={{marginBottom: '1rem'}} role="alert">{error}</p>}
 
-                    <div className="bg-white dark:bg-brand-secondary rounded-xl shadow-2xl overflow-hidden">
-                        {/* Tabs */}
+                    <div className="login-box">
                         {activeView !== 'admin' && (
-                            <div className="flex">
-                                <TabButton view="clone" title={t('loginPage.creatorSpace')} description={t('loginPage.creatorDesc')} icon={<UserCircleIcon className="w-8 h-8 mx-auto"/>} />
-                                <TabButton view="consulteur" title={t('loginPage.procheSpace')} description={t('loginPage.procheDesc')} icon={<UsersIcon className="w-8 h-8 mx-auto"/>} />
+                            <div className="login-tabs">
+                                <TabButton view="clone" title={t('loginPage.creatorSpace')} description={t('loginPage.creatorDesc')} icon={<UserCircleIcon />} />
+                                <TabButton view="consulteur" title={t('loginPage.procheSpace')} description={t('loginPage.procheDesc')} icon={<UsersIcon />} />
                             </div>
                         )}
                         {activeView === 'admin' && (
-                             <div className="p-4 text-center bg-gray-100/50 dark:bg-brand-secondary/50">
-                                <ShieldCheckIcon className="w-8 h-8 mx-auto text-red-500"/>
-                                <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t('loginPage.adminAccess')}</h3>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">{t('loginPage.adminDesc')}</p>
+                             <div className="login-tab active" style={{width: '100%'}}>
+                                <ShieldCheckIcon style={{color: 'var(--color-danger)'}}/>
+                                <h3 className="login-tab-title">{t('loginPage.adminAccess')}</h3>
+                                <p className="login-tab-desc">{t('loginPage.adminDesc')}</p>
                             </div>
                         )}
                         
-                        {/* Form Area */}
-                        <div className="p-8">
-                            {activeView === 'clone' && renderCloneForm()}
-                            {activeView === 'consulteur' && renderConsulteurForm()}
-                            {activeView === 'admin' && renderAdminForm()}
+                        <div className="login-form-area">
+                            {(activeView === 'clone' && renderCloneForm()) ||
+                             (activeView === 'consulteur' && renderConsulteurForm()) ||
+                             (activeView === 'admin' && renderAdminForm())}
                         </div>
                     </div>
                     
-                    {/* Discreet Admin Button */}
-                    <div className="text-center mt-4">
-                        <button 
-                            onClick={() => handleViewChange('admin')} 
-                            className="text-xs text-gray-300 hover:text-white hover:underline transition-colors"
-                        >
+                    <div className="login-admin-footer">
+                        <button onClick={() => handleViewChange('admin')}>
                             {t('loginPage.adminAccess')}
                         </button>
                     </div>

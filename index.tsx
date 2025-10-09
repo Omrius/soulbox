@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './styles.css'; // Ensure CSS is loaded
 // Fix: Add .tsx extension to imports
 import App from './App.tsx';
 import { AuthProvider } from './contexts/AuthContext.tsx';

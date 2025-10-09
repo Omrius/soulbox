@@ -27,6 +27,9 @@ const VoiceClone: React.FC = () => {
     const [ttsText, setTtsText] = useState("Bonjour, c'est votre clone vocal. Je suis prêt.");
     const [isGeneratingSpeech, setIsGeneratingSpeech] = useState(false);
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
+    const [cloningError, setCloningError] = useState<string | null>(null);
+    const [speechError, setSpeechError] = useState<string | null>(null);
+
 
     const chunksRef = useRef<Blob[]>([]);
 
@@ -67,6 +70,7 @@ const VoiceClone: React.FC = () => {
             return;
         }
         setIsCloning(true);
+        setCloningError(null);
         try {
             const newCloneId = await addVoiceClone(audioBlobs);
             setCloneId(newCloneId);
@@ -75,7 +79,8 @@ const VoiceClone: React.FC = () => {
             setAudioBlobs([]); // Clear samples after successful clone
         } catch (error) {
             console.error(error);
-            alert(t('voiceClone.errorMessage', { error: error instanceof Error ? error.message : 'Unknown error' }));
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            setCloningError(t('voiceClone.errorMessage', { error: errorMessage }));
         } finally {
             setIsCloning(false);
         }
@@ -88,11 +93,13 @@ const VoiceClone: React.FC = () => {
         }
         setIsGeneratingSpeech(true);
         setAudioUrl(null);
+        setSpeechError(null);
         try {
             const url = await textToSpeech(ttsText, cloneId);
             setAudioUrl(url);
         } catch (error) {
-             alert(t('voiceClone.speechError', { error: error instanceof Error ? error.message : 'Unknown error' }));
+             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+             setSpeechError(t('voiceClone.speechError', { error: errorMessage }));
         } finally {
             setIsGeneratingSpeech(false);
         }
@@ -100,78 +107,109 @@ const VoiceClone: React.FC = () => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('voiceClone.title')}</h1>
-            <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
+            <h1 className="page-title">{t('voiceClone.title')}</h1>
+            <p className="page-subheadline">
                 {t('voiceClone.subheadline')}
             </p>
 
             {!cloneId ? (
-                 <div className="mt-8 bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-sm">
-                    <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('voiceClone.step1Title')}</h2>
-                    <p className="mb-4 text-gray-600 dark:text-gray-400">{t('voiceClone.step1Desc')}</p>
+                 <div className="card" style={{marginTop: '2rem'}}>
+                    <h2 style={{fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem'}}>{t('voiceClone.step1Title')}</h2>
+                    <p style={{marginBottom: '1rem'}}>{t('voiceClone.step1Desc')}</p>
                     
-                    <div className="flex items-center gap-4">
+                    <div className="voice-clone-recorder">
                         <button
                             onClick={isRecording ? stopRecording : startRecording}
-                            className={`p-4 rounded-full transition-colors ${isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}`}
+                            className={`recorder-btn ${isRecording ? 'recording' : 'stopped'}`}
                         >
-                            {isRecording ? <StopIcon className="w-8 h-8 text-white" /> : <MicrophoneIcon className="w-8 h-8 text-white" />}
+                            {isRecording ? <StopIcon /> : <MicrophoneIcon />}
                         </button>
-                        <p className="font-medium text-gray-700 dark:text-gray-300">{isRecording ? t('voiceClone.stopRecording') : t('voiceClone.startRecording')}</p>
+                        <p className="recorder-status-text">{isRecording ? t('voiceClone.stopRecording') : t('voiceClone.startRecording')}</p>
                     </div>
 
-                    <div className="mt-6">
-                        <h3 className="font-semibold text-gray-800 dark:text-gray-200">{t('voiceClone.samplesRecorded', { count: audioBlobs.length })}</h3>
-                        <ul className="mt-2 space-y-2">
+                    <div style={{marginTop: '1.5rem'}}>
+                        <h3 style={{fontWeight: 600}}>{t('voiceClone.samplesRecorded', { count: audioBlobs.length })}</h3>
+                        <ul className="sample-list">
                             {audioBlobs.map((blob, index) => (
-                                <li key={index} className="flex items-center justify-between p-2 bg-gray-100 dark:bg-brand-tertiary rounded">
-                                    <p className="text-sm text-gray-700 dark:text-gray-300">{t('voiceClone.sample', { index: index + 1 })}</p>
-                                    <audio src={URL.createObjectURL(blob)} controls className="h-8" />
+                                <li key={index} className="sample-list-item">
+                                    <p>{t('voiceClone.sample', { index: index + 1 })}</p>
+                                    <audio src={URL.createObjectURL(blob)} controls />
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    <div className="mt-8 border-t pt-6 border-gray-200 dark:border-gray-700">
-                         <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('voiceClone.step2Title')}</h2>
-                         <button
-                            onClick={handleCreateClone}
-                            disabled={isCloning || audioBlobs.length === 0}
-                            className="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-                         >
-                            {isCloning ? t('voiceClone.creatingButton') : t('voiceClone.createButton')}
-                         </button>
+                    <div className="divider">
+                         <h2 style={{fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem'}}>{t('voiceClone.step2Title')}</h2>
+                         
+                         {cloningError ? (
+                            <div className="error-box">
+                                <p>{cloningError}</p>
+                                <button
+                                    onClick={handleCreateClone}
+                                    disabled={isCloning}
+                                    className="btn btn-danger"
+                                >
+                                    {isCloning ? t('common.loading') : t('voiceClone.retryButton')}
+                                </button>
+                            </div>
+                         ) : (
+                            <button
+                                onClick={handleCreateClone}
+                                disabled={isCloning || audioBlobs.length === 0}
+                                className="btn btn-info"
+                                style={{padding: '0.75rem 1.5rem'}}
+                            >
+                               {isCloning ? t('voiceClone.creatingButton') : t('voiceClone.createButton')}
+                            </button>
+                         )}
                     </div>
                 </div>
             ) : (
-                <div className="mt-8 bg-white dark:bg-brand-secondary p-6 rounded-lg shadow-sm">
-                    <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('voiceClone.testTitle')}</h2>
-                    <p className="mb-2 text-gray-600 dark:text-gray-400">{t('voiceClone.testReady', { cloneId, '1': (text) => <code className="text-xs bg-gray-100 dark:bg-brand-tertiary p-1 rounded">{text}</code> })}</p>
-                    <p className="mb-4 text-gray-600 dark:text-gray-400">{t('voiceClone.testInstructions')}</p>
+                <div className="card" style={{marginTop: '2rem'}}>
+                    <h2 style={{fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem'}}>{t('voiceClone.testTitle')}</h2>
+                    <p style={{marginBottom: '0.5rem'}}>
+                        {t('voiceClone.testReady', { cloneId, '1': (text: string) => <code style={{fontSize: '0.75rem', backgroundColor: 'var(--color-bg-input)', padding: '0.25rem', borderRadius: 'var(--rounded-sm)'}}>{text}</code> })}
+                    </p>
+                    <p style={{marginBottom: '1rem'}}>{t('voiceClone.testInstructions')}</p>
                     
                     <textarea 
                         value={ttsText}
                         onChange={(e) => setTtsText(e.target.value)}
                         rows={4}
-                        className="w-full p-2 rounded bg-gray-100 dark:bg-brand-tertiary dark:text-white"
+                        className="form-textarea"
                     />
 
                     <button
                         onClick={handleGenerateSpeech}
                         disabled={isGeneratingSpeech}
-                        className="mt-4 bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50"
+                        className="btn btn-success"
+                        style={{marginTop: '1rem'}}
                     >
                         {isGeneratingSpeech ? t('voiceClone.generatingSpeechButton') : t('voiceClone.generateSpeechButton')}
                     </button>
                     
-                    {audioUrl && (
-                        <div className="mt-4">
+                    {speechError && (
+                         <div className="error-box-inline">
+                            <p style={{marginBottom: 0}}>{speechError}</p>
+                            <button
+                                onClick={handleGenerateSpeech}
+                                className="btn btn-danger"
+                                style={{fontSize: '0.875rem', padding: '0.25rem 0.75rem'}}
+                            >
+                                {t('voiceClone.retryButton')}
+                            </button>
+                        </div>
+                    )}
+
+                    {audioUrl && !speechError && (
+                        <div style={{marginTop: '1rem'}}>
                             <audio src={audioUrl} controls autoPlay />
                         </div>
                     )}
                     
-                    <div className="mt-6">
-                        <button onClick={() => { localStorage.removeItem('voiceCloneId'); setCloneId(null); }} className="text-sm text-red-500 hover:underline">
+                    <div style={{marginTop: '1.5rem'}}>
+                        <button onClick={() => { localStorage.removeItem('voiceCloneId'); setCloneId(null); }} style={{fontSize: '0.875rem', color: 'var(--color-danger)', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer'}}>
                             {t('voiceClone.deleteAndRestart')}
                         </button>
                     </div>

@@ -172,10 +172,29 @@
       "legalTitle": "Légal",
       "cgu": "CGU",
       "privacy": "Confidentialité",
+      "legal": "Mentions Légales",
       "contact": "Contact",
       "newsletterTitle": "Recevez la démo & nos actualités",
       "subscribe": "S'inscrire",
       "copyright": "© {{year}} SoulBox. Tous droits réservés."
+    },
+    "product": {
+      "title": "Votre Héritage, Réinventé",
+      "subtitle": "SoulBox est plus qu'une archive. C'est une présence vivante, un coffre-fort pour l'avenir et un pont entre les générations.",
+      "features": [
+        {
+          "title": "Le Clone Vocal : Une Voix Familière et Éternelle",
+          "body": "Notre technologie de pointe recrée la chaleur, le ton et les nuances uniques de la voix d'un être cher. Ce n'est pas une simple synthèse vocale, mais une présence authentique qui peut partager des souvenirs, raconter des histoires ou simplement offrir des mots de réconfort, préservant ainsi l'essence de la personne pour toujours."
+        },
+        {
+          "title": "Le Coffre-Fort Numérique : Vos Trésors Scellés pour l'Avenir",
+          "body": "Déposez des messages, des vidéos, des documents importants ou des conseils de vie dans un espace inviolable. Grâce à notre système de sécurité multisig, seuls vos gardiens de confiance, agissant de concert, peuvent déverrouiller ces souvenirs, en respectant scrupuleusement les conditions que vous avez fixées."
+        },
+        {
+          "title": "Les Canaux de Partage : Votre Héritage, Partagé Selon Vos Règles",
+          "body": "Vous gardez le contrôle total. Définissez précisément qui peut interagir avec votre clone, qui peut accéder à votre coffre-fort, et dans quelles circonstances. SoulBox vous permet de construire un héritage numérique sur mesure, en toute confiance et sérénité."
+        }
+      ]
     }
   },
   "loginPage": {
@@ -261,6 +280,7 @@
     "modalGenerating": "Génération...",
     "modalContentLabel": "Message ou Contenu",
     "modalSealButton": "Sceller et Sauvegarder",
+    "modalSealing": "Scellement...",
     "modalGuardiansLabel": "Assigner des Gardiens",
     "modalNoGuardians": "Aucun gardien trouvé. Veuillez en ajouter dans les 'Canaux de Partage'.",
     "modalGuardiansDesc": "Les gardiens sélectionnés pourront participer au déverrouillage de cet élément."
@@ -283,8 +303,6 @@
     "delete": "Supprimer",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce bénéficiaire ?",
     "confirmGuardianDelete": "Êtes-vous sûr de vouloir supprimer ce gardien ?",
-    "tokenSentSuccess": "Jeton envoyé avec succès !",
-    "tokenSentError": "Erreur lors de l'envoi du jeton.",
     "modalTitle": "Nouveau Bénéficiaire",
     "modalFirstName": "Prénom",
     "modalLastName": "Nom",
@@ -321,7 +339,8 @@
     "generateSpeechButton": "Générer la Voix",
     "generatingSpeechButton": "Génération...",
     "speechError": "Erreur lors de la génération de la parole : {{error}}",
-    "deleteAndRestart": "Supprimer ce clone et recommencer"
+    "deleteAndRestart": "Supprimer ce clone et recommencer",
+    "retryButton": "Réessayer"
   },
   "billing": {
     "title": "Abonnements",
@@ -349,7 +368,8 @@
       "Toutes les fonctionnalités Premium",
       "Synchronisation Google Drive",
       "Support prioritaire 24/7"
-    ]
+    ],
+    "checkoutError": "Impossible de créer la session de paiement. Veuillez réessayer."
   },
   "settings": {
     "title": "Réglages du Compte",
@@ -372,6 +392,11 @@
     "loadingError": "Erreur de chargement des données utilisateur.",
     "personalityQuiz": "Quiz de Personnalité",
     "quizDesc": "Répondez à ces questions pour définir les traits fondamentaux de votre clone. C'est la source la plus importante.",
+    "customQuestionsTitle": "Mes questions personnalisées",
+    "customQuestionLabel": "Votre Question",
+    "customQuestionPlaceholder": "Ex: Quel est mon plus grand regret ?",
+    "customAnswerPlaceholder": "Réponse...",
+    "addQuestion": "Ajouter une question",
     "knowledgeDocs": "Documents de Connaissance",
     "uploadFile": "Téléchargez un fichier",
     "uploading": "Téléchargement...",
@@ -381,7 +406,8 @@
     "savingButton": "Sauvegarde en cours...",
     "testButton": "Tester le Clone",
     "saveSuccessDrive": "Entraînement sauvegardé sur Google Drive. Votre clone est maintenant à jour pour vos proches !",
-    "saveSuccessLocal": "Entraînement sauvegardé ! Votre clone est maintenant à jour pour vos proches. Pensez à connecter Google Drive dans les Réglages pour une sauvegarde sécurisée."
+    "saveSuccessLocal": "Entraînement sauvegardé ! Votre clone est maintenant à jour pour vos proches. Pensez à connecter Google Drive dans les Réglages pour une sauvegarde sécurisée.",
+    "retryButton": "Réessayer"
   },
   "chatWindow": {
     "back": "Retour au Centre d'Entraînement",
@@ -466,6 +492,24 @@
     "modalNewAdmin": "Nouvel Administrateur",
     "modalFullName": "Nom complet",
     "modalCreate": "Créer",
-    "modalAddAdminError": "Veuillez saisir un nom et sélectionner au moins une permission."
+    "modalAddAdminError": "Veuillez saisir un nom et sélectionner au moins une permission.",
+    "passwordManagementTitle": "Gestion du mot de passe",
+    "currentPasswordLabel": "Mot de passe actuel",
+    "newPasswordLabel": "Nouveau mot de passe",
+    "confirmPasswordLabel": "Confirmer le nouveau mot de passe",
+    "changePasswordButton": "Changer le mot de passe",
+    "changingPasswordButton": "Changement en cours...",
+    "passwordChangeSuccess": "Mot de passe changé avec succès !",
+    "errorCurrentPasswordIncorrect": "Le mot de passe actuel est incorrect.",
+    "errorPasswordsDoNotMatch": "Les nouveaux mots de passe ne correspondent pas.",
+    "docManagementTitle": "Gestion des Documents Légaux",
+    "docLabelCGU": "Conditions Générales d'Utilisation (CGU)",
+    "docLabelPrivacy": "Politique de Confidentialité",
+    "docLabelLegal": "Mentions Légales",
+    "docLabelContact": "Page de Contact",
+    "docCurrentFile": "Fichier actuel",
+    "docNoFile": "Aucun fichier téléversé.",
+    "docChangeFile": "Changer le fichier (.pdf)",
+    "docUploading": "Téléversement..."
   }
 }

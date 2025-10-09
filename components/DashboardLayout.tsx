@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 // Fix: Add .tsx extension to imports
 import SideNav from './SideNav.tsx';
@@ -17,7 +18,7 @@ import { GoogleIcon } from './icons/Icon.tsx';
 
 const NavOverlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
     <div 
-        className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+        className="nav-overlay"
         onClick={onClick}
         aria-hidden="true"
     ></div>
@@ -34,22 +35,22 @@ const DriveConnectModal: React.FC<{ onClose: () => void; onConnect: () => Promis
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-brand-secondary p-8 rounded-lg max-w-md w-full text-center shadow-2xl">
-                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('driveModal.title')}</h2>
-                <p className="mb-6 text-gray-600 dark:text-gray-300">
+        <div className="modal-overlay">
+            <div className="modal-content" style={{textAlign: 'center'}}>
+                <h2 className="modal-title">{t('driveModal.title')}</h2>
+                <p style={{marginBottom: '1.5rem'}}>
                     {t('driveModal.description')}
                 </p>
-                <div className="space-y-4">
+                <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
                     <button
                         onClick={handleConnect}
                         disabled={isConnecting}
-                        className="w-full flex items-center justify-center bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
+                        className="btn btn-info w-full"
                     >
                         <GoogleIcon className="w-6 h-6 mr-3" />
                         {isConnecting ? t('driveModal.connectingButton') : t('driveModal.connectButton')}
                     </button>
-                    <button onClick={onClose} className="w-full text-sm text-gray-500 dark:text-gray-400 hover:underline">
+                    <button onClick={onClose} style={{background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', fontSize: '0.875rem'}}>
                         {t('driveModal.remindLater')}
                     </button>
                 </div>
@@ -107,7 +108,7 @@ const DashboardLayout: React.FC = () => {
     };
 
     return (
-        <div className="flex h-screen bg-gray-100 dark:bg-brand-dark">
+        <div className="dashboard-layout">
             {showDriveModal && <DriveConnectModal onClose={() => setShowDriveModal(false)} onConnect={handleConnectDrive} />}
             {isMobileNavOpen && <NavOverlay onClick={() => setMobileNavOpen(false)} />}
             <SideNav 
@@ -116,10 +117,10 @@ const DashboardLayout: React.FC = () => {
                 isMobileNavOpen={isMobileNavOpen}
                 setMobileNavOpen={setMobileNavOpen}
             />
-            <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="dashboard-content-wrapper">
                 <Header onMenuClick={() => setMobileNavOpen(true)} />
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-brand-dark">
-                    <div className="container mx-auto px-6 py-8">
+                <main className="dashboard-main">
+                    <div className="dashboard-main-content">
                         {renderView()}
                     </div>
                 </main>

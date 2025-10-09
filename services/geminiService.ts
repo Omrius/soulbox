@@ -168,20 +168,25 @@ export const fetchTrainingDocuments = async(): Promise<TrainingDocument[]> => {
 };
 
 export const uploadTrainingDocument = async (file: File): Promise<TrainingDocument> => {
-     return new Promise(resolve => {
+     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const newDoc: TrainingDocument = {
-                id: `doc_${Date.now()}`,
-                name: file.name,
-                uploadedAt: new Date().toISOString(),
-                status: 'ready'
-            };
-            mockTrainingDocuments.push(newDoc);
-            // Simulate processing time for other files
-            setTimeout(() => {
-                mockTrainingDocuments = mockTrainingDocuments.map(d => d.status === 'processing' ? {...d, status: 'ready'} : d);
-            }, 3000);
-            resolve(newDoc);
+            // Simulate a failure rate
+            if (Math.random() > 0.3) { // 70% success rate
+                const newDoc: TrainingDocument = {
+                    id: `doc_${Date.now()}`,
+                    name: file.name,
+                    uploadedAt: new Date().toISOString(),
+                    status: 'ready'
+                };
+                mockTrainingDocuments.push(newDoc);
+                // Simulate processing time for other files
+                setTimeout(() => {
+                    mockTrainingDocuments = mockTrainingDocuments.map(d => d.status === 'processing' ? {...d, status: 'ready'} : d);
+                }, 3000);
+                resolve(newDoc);
+            } else {
+                reject(new Error("Échec de téléversement simulé. Veuillez réessayer."));
+            }
         }, 2000);
     });
 };

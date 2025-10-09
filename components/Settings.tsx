@@ -27,50 +27,52 @@ const Settings: React.FC = () => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('settings.title')}</h1>
-            <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
+            <h1 className="page-title">{t('settings.title')}</h1>
+            <p className="page-subheadline">
                 {t('settings.subheadline')}
             </p>
 
-            <div className="mt-8 max-w-2xl">
-                <div className="bg-white dark:bg-brand-secondary shadow-md rounded-lg p-8">
-                    <h2 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">{t('settings.profile')}</h2>
+            <div style={{marginTop: '2rem', maxWidth: '42rem'}}>
+                <div className="card">
+                    <h2 className="h2" style={{marginBottom: '1.5rem'}}>{t('settings.profile')}</h2>
                     <form onSubmit={handleSaveChanges}>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 dark:text-gray-300 mb-2">{t('settings.fullName')}</label>
-                            <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full p-2 rounded bg-gray-100 dark:bg-brand-tertiary dark:text-white"/>
+                        <div style={{marginBottom: '1rem'}}>
+                            <label className="form-label">{t('settings.fullName')}</label>
+                            <input type="text" value={name} onChange={e => setName(e.target.value)} className="form-input"/>
                         </div>
-                         <div className="mb-6">
-                            <label className="block text-gray-700 dark:text-gray-300 mb-2">{t('common.email')}</label>
-                            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full p-2 rounded bg-gray-100 dark:bg-brand-tertiary dark:text-white"/>
+                         <div style={{marginBottom: '1.5rem'}}>
+                            <label className="form-label">{t('common.email')}</label>
+                            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="form-input"/>
                         </div>
-                        <button type="submit" disabled={isSaving} className="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50">
+                        <button type="submit" disabled={isSaving} className="btn btn-info">
                             {isSaving ? t('settings.saving') : t('settings.saveChanges')}
                         </button>
                     </form>
                 </div>
 
-                <div className="bg-white dark:bg-brand-secondary shadow-md rounded-lg p-8 mt-8">
-                     <h2 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">{t('settings.integrations')}</h2>
-                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
-                         <div>
-                            <p className="font-medium text-gray-800 dark:text-gray-200">{t('settings.googleDrive')}</p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">{t('settings.googleDriveDesc')}</p>
+                <div className="card" style={{marginTop: '2rem'}}>
+                     <h2 className="h2" style={{marginBottom: '1.5rem'}}>{t('settings.integrations')}</h2>
+                     <div style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem'}}>
+                         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                            <div>
+                                <p style={{fontWeight: 500}}>{t('settings.googleDrive')}</p>
+                                <p style={{fontSize: '0.875rem', color: 'var(--color-text-muted)'}}>{t('settings.googleDriveDesc')}</p>
+                            </div>
+                            <button 
+                                onClick={connectGoogleDrive}
+                                disabled={cloneUser.googleDriveConnected}
+                                className="btn btn-success"
+                            >
+                                {cloneUser.googleDriveConnected ? t('settings.connected') : t('settings.connect')}
+                            </button>
                          </div>
-                         <button 
-                            onClick={connectGoogleDrive}
-                            disabled={cloneUser.googleDriveConnected}
-                            className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed self-start sm:self-auto"
-                         >
-                            {cloneUser.googleDriveConnected ? t('settings.connected') : t('settings.connect')}
-                         </button>
                      </div>
-                     <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                     <div className="divider" style={{paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                          <div>
-                            <p className="font-medium text-gray-800 dark:text-gray-200">Langue</p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Choisissez la langue d'affichage</p>
+                            <p style={{fontWeight: 500}}>Langue</p>
+                            <p style={{fontSize: '0.875rem', color: 'var(--color-text-muted)'}}>Choisissez la langue d'affichage</p>
                          </div>
-                         <div className="self-start sm:self-auto">
+                         <div>
                             <LanguageSwitcher />
                          </div>
                      </div>

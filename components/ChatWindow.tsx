@@ -49,44 +49,44 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ context, onBack }) => {
 
     return (
         <div>
-            <button onClick={onBack} className="mb-4 text-blue-500 hover:underline">
+            <button onClick={onBack} style={{marginBottom: '1rem', color: 'var(--color-info)'}}>
                 &larr; {t('chatWindow.back')}
             </button>
-            <div className="bg-white dark:bg-brand-secondary rounded-lg shadow-md max-w-2xl mx-auto">
-                <div className="p-4 border-b dark:border-gray-700">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{t('chatWindow.title')}</h2>
+            <div className="chat-window">
+                <div className="chat-header">
+                    <h2 className="h2">{t('chatWindow.title')}</h2>
                 </div>
-                <div className="h-96 overflow-y-auto p-4 space-y-4">
+                <div className="chat-messages">
                     {messages.map((msg, index) => (
-                        <div key={index} className={`flex items-start gap-3 ${msg.sender === 'user' ? 'justify-end' : ''}`}>
-                             {msg.sender === 'clone' && <UserCircleIcon className="w-8 h-8 text-brand-accent flex-shrink-0" />}
-                            <div className={`p-3 rounded-lg max-w-xs sm:max-w-sm md:max-w-md ${msg.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-brand-tertiary text-gray-800 dark:text-gray-200'}`}>
-                                <p style={{whiteSpace: "pre-wrap"}}>{msg.text}</p>
+                        <div key={index} className={`chat-message ${msg.sender === 'user' ? 'user' : 'clone'}`}>
+                             {msg.sender === 'clone' && <UserCircleIcon className="chat-message-avatar" />}
+                            <div className={`chat-bubble ${msg.sender === 'user' ? 'user' : 'clone'}`}>
+                                <p>{msg.text}</p>
                             </div>
                         </div>
                     ))}
                     {isLoading && (
-                         <div className="flex items-start gap-3">
-                             <UserCircleIcon className="w-8 h-8 text-brand-accent flex-shrink-0" />
-                            <div className="p-3 rounded-lg bg-gray-200 dark:bg-brand-tertiary text-gray-800 dark:text-gray-200">
+                         <div className="chat-message clone">
+                             <UserCircleIcon className="chat-message-avatar" />
+                            <div className="chat-bubble clone">
                                 <p>...</p>
                             </div>
                         </div>
                     )}
                     <div ref={messagesEndRef} />
                 </div>
-                <div className="p-4 border-t dark:border-gray-700 flex items-center">
+                <div className="chat-input-area">
                     <input
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
                         placeholder={t('chatWindow.placeholder')}
-                        className="flex-grow p-2 rounded-lg bg-gray-100 dark:bg-brand-tertiary dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                        className="chat-input form-input"
                         disabled={isLoading}
                     />
-                    <button onClick={handleSend} disabled={isLoading} className="ml-3 p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50">
-                        <SendIcon className="w-5 h-5"/>
+                    <button onClick={handleSend} disabled={isLoading} className="chat-send-btn">
+                        <SendIcon />
                     </button>
                 </div>
             </div>

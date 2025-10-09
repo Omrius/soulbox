@@ -13,24 +13,24 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     const { t } = useI18n();
     
     return (
-        <header className="flex items-center justify-between p-4 bg-white dark:bg-brand-secondary border-b dark:border-brand-tertiary shadow-sm">
+        <header className="header">
             {/* Mobile Menu Button */}
-            <button onClick={onMenuClick} className="text-gray-500 dark:text-gray-300 md:hidden">
+            <button onClick={onMenuClick} className="header-menu-btn">
                 <MenuIcon className="h-6 w-6" />
             </button>
 
             {/* Title (optional, can be dynamic) */}
             <div className="hidden md:block">
-                 <h1 className="text-xl font-semibold text-gray-800 dark:text-white">{t('header.dashboardTitle')}</h1>
+                 <h1 className="header-title">{t('header.dashboardTitle')}</h1>
             </div>
 
             {/* User Profile Section */}
-            <div className="flex items-center">
-                <span className="text-gray-800 dark:text-white mr-3 font-medium hidden sm:block">{user?.name}</span>
+            <div className="header-user">
+                <span className="header-user-name">{user?.name}</span>
                 {user?.avatarUrl ? (
-                    <img src={user.avatarUrl} alt="User Avatar" className="h-8 w-8 rounded-full object-cover" />
+                    <img src={user.avatarUrl} alt="User Avatar" className="header-user-avatar" />
                 ) : (
-                    <UserCircleIcon className="h-8 w-8 text-gray-400" />
+                    <UserCircleIcon className="header-user-icon" />
                 )}
             </div>
         </header>

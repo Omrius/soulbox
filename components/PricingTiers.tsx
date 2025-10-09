@@ -1,4 +1,3 @@
-
 // components/PricingTiers.tsx
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -42,44 +41,53 @@ const PricingTiers: React.FC = () => {
     const { user } = useAuth();
     const { t } = useI18n();
     const [isLoading, setIsLoading] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const handleSubscribe = async (priceId: string) => {
         setIsLoading(priceId);
+        setError(null);
         try {
             const { url } = await createCheckoutSession(priceId);
             if (url) {
                 window.location.href = url;
             } else {
-                throw new Error("Impossible de créer la session de paiement.");
+                throw new Error(t('billing.checkoutError'));
             }
-        } catch (error) {
-            console.error("Payment error:", error);
-            alert("Une erreur est survenue lors de la redirection vers la page de paiement.");
+        } catch (err) {
+            console.error("Payment error:", err);
+            const message = err instanceof Error ? err.message : t('billing.checkoutError');
+            setError(message);
             setIsLoading(null);
         }
     };
 
     return (
-        <div>
-            <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white">{t('billing.title')}</h1>
-            <p className="mt-2 text-lg text-center text-gray-600 dark:text-gray-400">
+        <div style={{textAlign: 'center'}}>
+            <h1 className="page-title">{t('billing.title')}</h1>
+            <p className="page-subheadline">
                 {t('billing.subheadline')}
             </p>
             
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {error && (
+                <div className="error-box" style={{marginTop: '2rem', maxWidth: '56rem', margin: '2rem auto 0'}}>
+                    <p style={{margin: 0}}>{error}</p>
+                </div>
+            )}
+
+            <div className="dashboard-stats-grid" style={{maxWidth: '56rem', margin: '3rem auto 0'}}>
                 {tiersData.map(tier => {
                     // The `t` function needs to be told this key returns an array
                     const features = t(tier.featuresKey) as unknown as string[];
                     return (
-                        <div key={tier.name} className={`bg-white dark:bg-brand-secondary p-8 rounded-lg shadow-lg flex flex-col ${tier.isFeatured ? 'border-2 border-brand-accent' : ''}`}>
-                            {tier.isFeatured && <span className="bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full self-start mb-4">{t('billing.recommended')}</span>}
-                            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{tier.name}</h2>
-                            <p className="mt-4 text-4xl font-bold text-gray-900 dark:text-white">{tier.price}</p>
+                        <div key={tier.name} className={`card ${tier.isFeatured ? 'featured' : ''}`} style={{display: 'flex', flexDirection: 'column', textAlign: 'left'}}>
+                            {tier.isFeatured && <span style={{backgroundColor: 'var(--brand-accent)', color: 'white', fontSize: '0.75rem', fontWeight: 700, padding: '0.25rem 0.75rem', borderRadius: '9999px', alignSelf: 'flex-start', marginBottom: '1rem'}}>{t('billing.recommended')}</span>}
+                            <h2 className="h2">{tier.name}</h2>
+                            <p style={{marginTop: '1rem', fontSize: '2.25rem', fontWeight: 700}}>{tier.price}</p>
                             
-                            <ul className="mt-8 space-y-4 text-gray-600 dark:text-gray-300 flex-grow">
+                            <ul style={{marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1, listStyle: 'none', padding: 0}}>
                                 {features.map(feature => (
-                                    <li key={feature} className="flex items-start">
-                                        <CheckCircleIcon className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                                    <li key={feature} style={{display: 'flex', alignItems: 'flex-start'}}>
+                                        <CheckCircleIcon style={{width: '1.25rem', height: '1.25rem', color: 'var(--color-success)', marginRight: '0.75rem', marginTop: '0.25rem', flexShrink: 0}} />
                                         <span>{feature}</span>
                                     </li>
                                 ))}
@@ -88,7 +96,8 @@ const PricingTiers: React.FC = () => {
                             <button
                                 onClick={() => handleSubscribe(tier.priceId)}
                                 disabled={user?.role === 'CLONE' && user.plan === tier.name || !!isLoading}
-                                className="mt-8 w-full py-3 px-6 rounded-lg font-semibold text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-brand-accent hover:bg-opacity-90"
+                                className="btn btn-primary w-full"
+                                style={{marginTop: '2rem'}}
                             >
                                 {isLoading === tier.priceId ? t('billing.redirecting') : (user?.role === 'CLONE' && user.plan === tier.name ? t('billing.currentPlan') : t('billing.choosePlan'))}
                             </button>

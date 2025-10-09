@@ -12,32 +12,39 @@ const AdminPayments: React.FC = () => {
     const { t } = useI18n();
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('admin.paymentsTitle')}</h1>
-            <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
+            <h1 className="page-title">{t('admin.paymentsTitle')}</h1>
+            <p className="page-subheadline">
                 {t('admin.paymentsDesc')}
             </p>
 
-             <div className="mt-8 bg-white dark:bg-brand-secondary shadow-md rounded-lg overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead className="bg-gray-50 dark:bg-brand-tertiary">
+             <div className="table-container" style={{marginTop: '2rem'}}>
+                <div className="table-wrapper">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('admin.paymentsTransactionId')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('admin.paymentsClient')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('admin.paymentsAmount')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('admin.paymentsDate')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('common.status')}</th>
+                                <th>{t('admin.paymentsTransactionId')}</th>
+                                <th>{t('admin.paymentsClient')}</th>
+                                <th>{t('admin.paymentsAmount')}</th>
+                                <th>{t('admin.paymentsDate')}</th>
+                                <th>{t('common.status')}</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tbody>
                         {mockPayments.map(p => (
                                 <tr key={p.id}>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{p.id}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{p.client}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{p.amount}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{p.date}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${p.status === 'Succès' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                    <td>{p.id}</td>
+                                    <td>{p.client}</td>
+                                    <td>{p.amount}</td>
+                                    <td>{p.date}</td>
+                                    <td>
+                                        <span style={{
+                                            padding: '0.125rem 0.5rem',
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            borderRadius: '9999px',
+                                            backgroundColor: p.status === 'Succès' ? 'var(--color-success-bg)' : 'var(--color-danger-bg)',
+                                            color: p.status === 'Succès' ? 'var(--color-success-text)' : 'var(--color-danger-text)',
+                                        }}>
                                             {p.status === 'Succès' ? t('admin.paymentStatusSuccess') : t('admin.paymentStatusFailed')}
                                         </span>
                                     </td>

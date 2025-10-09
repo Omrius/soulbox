@@ -143,3 +143,13 @@ export interface UnlockAttempt {
     idNumber: string;
     secretToken: string;
 }
+
+// NEW: Types for legal document management
+export type LegalDocumentType = 'cgu' | 'privacy' | 'legal' | 'contact';
+
+export type LegalDocuments = {
+    [key in LegalDocumentType]?: {
+        fileName: string;
+        url: string;
+    }
+};

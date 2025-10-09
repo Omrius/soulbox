@@ -13,36 +13,43 @@ const AdminClientManagement: React.FC = () => {
     const { t } = useI18n();
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('admin.clientsTitle')}</h1>
-            <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
+            <h1 className="page-title">{t('admin.clientsTitle')}</h1>
+            <p className="page-subheadline">
                 {t('admin.clientsDesc')}
             </p>
 
-            <div className="mt-8 bg-white dark:bg-brand-secondary shadow-md rounded-lg overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead className="bg-gray-50 dark:bg-brand-tertiary">
+            <div className="table-container" style={{marginTop: '2rem'}}>
+                <div className="table-wrapper">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('common.name')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('common.email')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('admin.clientsPlan')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('common.status')}</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{t('common.actions')}</th>
+                                <th>{t('common.name')}</th>
+                                <th>{t('common.email')}</th>
+                                <th>{t('admin.clientsPlan')}</th>
+                                <th>{t('common.status')}</th>
+                                <th>{t('common.actions')}</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tbody>
                             {mockClients.map(client => (
                                 <tr key={client.id}>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{client.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{client.email}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{client.plan}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${client.status === 'Actif' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                                    <td>{client.name}</td>
+                                    <td>{client.email}</td>
+                                    <td>{client.plan}</td>
+                                    <td>
+                                        <span style={{
+                                            padding: '0.125rem 0.5rem',
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            borderRadius: '9999px',
+                                            backgroundColor: client.status === 'Actif' ? 'var(--color-success-bg)' : 'var(--color-warning-bg)',
+                                            color: client.status === 'Actif' ? 'var(--color-success-text)' : 'var(--color-warning-text)',
+                                        }}>
                                             {client.status === 'Actif' ? t('admin.clientStatusActive') : t('admin.clientStatusPending')}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">{t('common.view')}</a>
+                                    <td>
+                                        <a href="#">{t('common.view')}</a>
                                     </td>
                                 </tr>
                             ))}

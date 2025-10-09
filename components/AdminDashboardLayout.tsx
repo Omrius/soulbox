@@ -11,7 +11,7 @@ import AdminSettings from './AdminSettings.tsx';
 
 const NavOverlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
     <div 
-        className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+        className="nav-overlay"
         onClick={onClick}
         aria-hidden="true"
     ></div>
@@ -40,7 +40,7 @@ const AdminDashboardLayout: React.FC = () => {
     };
 
     return (
-        <div className="flex h-screen bg-gray-100 dark:bg-brand-dark">
+        <div className="dashboard-layout">
             {isMobileNavOpen && <NavOverlay onClick={() => setMobileNavOpen(false)} />}
             <AdminSideNav 
                 currentView={currentView} 
@@ -48,10 +48,10 @@ const AdminDashboardLayout: React.FC = () => {
                 isMobileNavOpen={isMobileNavOpen}
                 setMobileNavOpen={setMobileNavOpen}
             />
-            <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="dashboard-content-wrapper">
                 <Header onMenuClick={() => setMobileNavOpen(true)} />
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-brand-dark">
-                    <div className="container mx-auto px-6 py-8">
+                <main className="dashboard-main">
+                    <div className="dashboard-main-content">
                         {renderView()}
                     </div>
                 </main>

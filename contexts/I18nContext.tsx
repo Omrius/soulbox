@@ -6,6 +6,7 @@ interface I18nContextType {
     language: string;
     t: (key: string, params?: { [key: string]: any }) => any;
     changeLanguage: (lang: string) => void;
+    isLoaded: boolean; // Add loading state
 }
 
 // Create the context
@@ -18,6 +19,7 @@ const supportedLanguages = ['fr', 'en'];
 export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [language, setLanguage] = useState<string>('fr'); // Default to French
     const [translations, setTranslations] = useState<any>({});
+    const [isLoaded, setIsLoaded] = useState(false); // Initialize loading state
 
     useEffect(() => {
         const savedLang = localStorage.getItem('soulbox_lang');
@@ -28,6 +30,7 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     useEffect(() => {
         const fetchTranslations = async () => {
+            setIsLoaded(false); // Reset loading state on language change
             try {
                 const response = await fetch(`/locales/${language}.json`);
                 if (!response.ok) {
@@ -45,18 +48,13 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 } catch (fallbackError) {
                     console.error('Could not load fallback translations', fallbackError);
                 }
+            } finally {
+                setIsLoaded(true); // Set loaded to true after fetch attempt
             }
         };
 
         fetchTranslations();
     }, [language]);
-
-    const changeLanguage = (lang: string) => {
-        if (supportedLanguages.includes(lang)) {
-            localStorage.setItem('soulbox_lang', lang);
-            setLanguage(lang);
-        }
-    };
 
     const t = (key: string, params?: { [key: string]: any }): any => {
         const keys = key.split('.');
@@ -93,9 +91,16 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return result || key;
     };
 
+    // Fix: Define the changeLanguage function to update language state and local storage.
+    const changeLanguage = (lang: string) => {
+        if (supportedLanguages.includes(lang)) {
+            localStorage.setItem('soulbox_lang', lang);
+            setLanguage(lang);
+        }
+    };
 
     return (
-        <I18nContext.Provider value={{ language, t, changeLanguage }}>
+        <I18nContext.Provider value={{ language, t, changeLanguage, isLoaded }}>
             {children}
         </I18nContext.Provider>
     );

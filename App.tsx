@@ -16,8 +16,8 @@ import ProcheDashboard from './components/PublicChatPortal.tsx';
 import AdminDashboardLayout from './components/AdminDashboardLayout.tsx';
 
 const App: React.FC = () => {
-  const { user, isLoading } = useAuth();
-  const { t } = useI18n();
+  const { user, isLoading: isAuthLoading } = useAuth();
+  const { isLoaded: isI18nLoaded } = useI18n();
   // State to manage which public page is shown when not authenticated
   const [publicView, setPublicView] = useState<'landing' | 'login'>('landing');
 
@@ -29,10 +29,10 @@ const App: React.FC = () => {
     }
   }, []);
 
-  if (isLoading) {
+  if (isAuthLoading || !isI18nLoaded) {
     return (
-      <div className="h-screen w-screen flex items-center justify-center bg-brand-dark text-white">
-        {t('common.loading')}
+      <div className="loading-screen">
+        Loading...
       </div>
     );
   }

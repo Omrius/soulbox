@@ -172,10 +172,29 @@
       "legalTitle": "Legal",
       "cgu": "Terms of Service",
       "privacy": "Privacy Policy",
+      "legal": "Legal Notice",
       "contact": "Contact",
       "newsletterTitle": "Get the demo & our news",
       "subscribe": "Subscribe",
       "copyright": "© {{year}} SoulBox. All rights reserved."
+    },
+    "product": {
+      "title": "Your Legacy, Reimagined",
+      "subtitle": "SoulBox is more than an archive. It's a living presence, a vault for the future, and a bridge between generations.",
+      "features": [
+        {
+          "title": "The Voice Clone: A Familiar and Eternal Voice",
+          "body": "Our advanced technology recreates the warmth, tone, and unique nuances of a loved one's voice. It's not just text-to-speech, but an authentic presence that can share memories, tell stories, or simply offer words of comfort, preserving the essence of the person forever."
+        },
+        {
+          "title": "The Digital Vault: Your Treasures Sealed for the Future",
+          "body": "Deposit messages, videos, important documents, or life advice into an inviolable space. Thanks to our multisig security system, only your trusted guardians, acting in concert, can unlock these memories, strictly adhering to the conditions you have set."
+        },
+        {
+          "title": "Sharing Channels: Your Legacy, Shared on Your Terms",
+          "body": "You remain in complete control. Precisely define who can interact with your clone, who can access your vault, and under what circumstances. SoulBox allows you to build a custom digital legacy with complete confidence and serenity."
+        }
+      ]
     }
   },
   "loginPage": {
@@ -261,6 +280,7 @@
     "modalGenerating": "Generating...",
     "modalContentLabel": "Message or Content",
     "modalSealButton": "Seal and Save",
+    "modalSealing": "Sealing...",
     "modalGuardiansLabel": "Assign Guardians",
     "modalNoGuardians": "No guardians found. Please add them in the 'Sharing Channels' section.",
     "modalGuardiansDesc": "The selected guardians will be able to participate in unlocking this item."
@@ -283,8 +303,6 @@
     "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete this beneficiary?",
     "confirmGuardianDelete": "Are you sure you want to delete this guardian?",
-    "tokenSentSuccess": "Token sent successfully!",
-    "tokenSentError": "Error sending token.",
     "modalTitle": "New Beneficiary",
     "modalFirstName": "First Name",
     "modalLastName": "Last Name",
@@ -321,7 +339,8 @@
     "generateSpeechButton": "Generate Speech",
     "generatingSpeechButton": "Generating...",
     "speechError": "Error generating speech: {{error}}",
-    "deleteAndRestart": "Delete this clone and start over"
+    "deleteAndRestart": "Delete this clone and start over",
+    "retryButton": "Retry"
   },
   "billing": {
     "title": "Subscriptions",
@@ -349,7 +368,8 @@
       "All Premium features",
       "Google Drive synchronization",
       "24/7 priority support"
-    ]
+    ],
+    "checkoutError": "Could not create payment session. Please try again."
   },
   "settings": {
     "title": "Account Settings",
@@ -372,6 +392,11 @@
     "loadingError": "Error loading user data.",
     "personalityQuiz": "Personality Quiz",
     "quizDesc": "Answer these questions to define your clone's core traits. This is the most important source.",
+    "customQuestionsTitle": "My Custom Questions",
+    "customQuestionLabel": "Your Question",
+    "customQuestionPlaceholder": "E.g., What is my biggest regret?",
+    "customAnswerPlaceholder": "Answer...",
+    "addQuestion": "Add Question",
     "knowledgeDocs": "Knowledge Documents",
     "uploadFile": "Upload a file",
     "uploading": "Uploading...",
@@ -381,7 +406,8 @@
     "savingButton": "Saving...",
     "testButton": "Test Clone",
     "saveSuccessDrive": "Training saved to Google Drive. Your clone is now updated for your relatives!",
-    "saveSuccessLocal": "Training saved! Your clone is now updated for your relatives. Consider connecting Google Drive in Settings for a secure backup."
+    "saveSuccessLocal": "Training saved! Your clone is now updated for your relatives. Consider connecting Google Drive in Settings for a secure backup.",
+    "retryButton": "Retry"
   },
   "chatWindow": {
     "back": "Back to Training Center",
@@ -466,6 +492,24 @@
     "modalNewAdmin": "New Administrator",
     "modalFullName": "Full Name",
     "modalCreate": "Create",
-    "modalAddAdminError": "Please enter a name and select at least one permission."
+    "modalAddAdminError": "Please enter a name and select at least one permission.",
+    "passwordManagementTitle": "Password Management",
+    "currentPasswordLabel": "Current Password",
+    "newPasswordLabel": "New Password",
+    "confirmPasswordLabel": "Confirm New Password",
+    "changePasswordButton": "Change Password",
+    "changingPasswordButton": "Changing...",
+    "passwordChangeSuccess": "Password changed successfully!",
+    "errorCurrentPasswordIncorrect": "Current password is incorrect.",
+    "errorPasswordsDoNotMatch": "New passwords do not match.",
+    "docManagementTitle": "Legal Document Management",
+    "docLabelCGU": "Terms of Service (ToS)",
+    "docLabelPrivacy": "Privacy Policy",
+    "docLabelLegal": "Legal Notice",
+    "docLabelContact": "Contact Page",
+    "docCurrentFile": "Current file",
+    "docNoFile": "No file uploaded.",
+    "docChangeFile": "Change file (.pdf)",
+    "docUploading": "Uploading..."
   }
 }
