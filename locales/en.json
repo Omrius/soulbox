@@ -409,7 +409,12 @@
     "testButton": "Test Clone",
     "saveSuccessDrive": "Training saved to Google Drive. Your clone is now updated for your relatives!",
     "saveSuccessLocal": "Training saved! Your clone is now updated for your relatives. Consider connecting Google Drive in Settings for a secure backup.",
-    "retryButton": "Retry"
+    "retryButton": "Retry",
+    "customKnowledgeTitle": "Specific Knowledge & Memories",
+    "customKnowledgeDesc": "Add specific facts, memories, or anecdotes your clone should know. For example: 'My biggest regret is...', 'The happiest memory is...'",
+    "noCustomKnowledge": "No specific knowledge added.",
+    "customKnowledgePlaceholder": "Enter a memory or fact...",
+    "addKnowledge": "Add this knowledge"
   },
   "chatWindow": {
     "back": "Back to Training Center",

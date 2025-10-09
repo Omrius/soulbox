@@ -1,6 +1,6 @@
 // components/TrainingCenter.tsx
 import React, { useState, useEffect } from 'react';
-import { TrainingData, TrainingDocument, DashboardView, PersonalityQuizQuestion } from '../types';
+import { TrainingData, TrainingDocument, DashboardView, PersonalityQuizQuestion, CustomKnowledge } from '../types';
 import { 
     fetchTrainingData, 
     saveTrainingData,
@@ -31,6 +31,7 @@ const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }
     const [isTesting, setIsTesting] = useState(false);
     const [uploadError, setUploadError] = useState<string | null>(null);
     const [fileToUpload, setFileToUpload] = useState<File | null>(null);
+    const [newKnowledgeText, setNewKnowledgeText] = useState('');
 
 
     useEffect(() => {
@@ -79,6 +80,25 @@ const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }
             handleDataChange('personalityQuiz', updatedQuiz);
         }
     };
+
+    const handleAddCustomKnowledgeItem = () => {
+        if (trainingData && newKnowledgeText.trim()) {
+            const newItem: CustomKnowledge = {
+                id: Date.now(),
+                text: newKnowledgeText.trim(),
+            };
+            handleDataChange('customKnowledge', [...trainingData.customKnowledge, newItem]);
+            setNewKnowledgeText('');
+        }
+    };
+
+    const handleRemoveCustomKnowledgeItem = (id: number) => {
+        if (trainingData) {
+            const updatedKnowledge = trainingData.customKnowledge.filter(item => item.id !== id);
+            handleDataChange('customKnowledge', updatedKnowledge);
+        }
+    };
+
 
     const handleSave = async () => {
         if (!trainingData || !user) return;
@@ -237,6 +257,45 @@ const TrainingCenter: React.FC<{ setCurrentView: (view: DashboardView) => void }
                                 </li>
                             ))}
                          </ul>
+                    </div>
+                    {/* NEW: Custom Knowledge */}
+                    <div className="card">
+                        <h2 className="h2" style={{marginBottom: '1rem'}}>{t('trainingCenter.customKnowledgeTitle')}</h2>
+                        <p style={{marginBottom: '1.5rem', color: 'var(--color-text-muted)'}}>{t('trainingCenter.customKnowledgeDesc')}</p>
+                        
+                        <div className="doc-list" style={{marginBottom: '1rem', maxHeight: '10rem', overflowY: 'auto'}}>
+                            {trainingData.customKnowledge.map(item => (
+                                <li key={item.id} className="doc-list-item">
+                                    <span style={{whiteSpace: 'normal', flex: 1, paddingRight: '0.5rem'}}>{item.text}</span>
+                                    <button onClick={() => handleRemoveCustomKnowledgeItem(item.id)}>
+                                        <TrashIcon className="trash-icon"/>
+                                    </button>
+                                </li>
+                            ))}
+                            {trainingData.customKnowledge.length === 0 && (
+                                <p style={{fontSize: '0.875rem', color: 'var(--color-text-muted)', textAlign: 'center'}}>{t('trainingCenter.noCustomKnowledge')}</p>
+                            )}
+                        </div>
+                        
+                        <div>
+                            <textarea
+                                rows={3}
+                                value={newKnowledgeText}
+                                onChange={(e) => setNewKnowledgeText(e.target.value)}
+                                placeholder={t('trainingCenter.customKnowledgePlaceholder')}
+                                className="form-textarea"
+                                style={{marginBottom: '0.5rem'}}
+                            />
+                            <button 
+                                onClick={handleAddCustomKnowledgeItem} 
+                                disabled={!newKnowledgeText.trim()}
+                                className="btn btn-secondary"
+                                style={{width: '100%'}}
+                            >
+                                <PlusIcon className="w-4 h-4 mr-2" />
+                                {t('trainingCenter.addKnowledge')}
+                            </button>
+                        </div>
                     </div>
                     {/* Actions */}
                     <div className="card">

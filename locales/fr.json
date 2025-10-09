@@ -409,7 +409,12 @@
     "testButton": "Tester le Clone",
     "saveSuccessDrive": "Entraînement sauvegardé sur Google Drive. Votre clone est maintenant à jour pour vos proches !",
     "saveSuccessLocal": "Entraînement sauvegardé ! Votre clone est maintenant à jour pour vos proches. Pensez à connecter Google Drive dans les Réglages pour une sauvegarde sécurisée.",
-    "retryButton": "Réessayer"
+    "retryButton": "Réessayer",
+    "customKnowledgeTitle": "Savoirs & Souvenirs Spécifiques",
+    "customKnowledgeDesc": "Ajoutez des faits, des souvenirs ou des anecdotes précises que votre clone doit connaître. Par exemple: 'Mon plus grand regret est de...', 'Le souvenir le plus heureux est...'",
+    "noCustomKnowledge": "Aucun savoir spécifique ajouté.",
+    "customKnowledgePlaceholder": "Entrez un souvenir ou un fait...",
+    "addKnowledge": "Ajouter ce savoir"
   },
   "chatWindow": {
     "back": "Retour au Centre d'Entraînement",
