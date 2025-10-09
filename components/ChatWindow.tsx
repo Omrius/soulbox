@@ -1,7 +1,7 @@
 // components/ChatWindow.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { TrainingData } from '../types';
-import { chatWithClone } from '../services/geminiService';
+import { chatWithClone } from '../services/aiService'; // UPDATED
 import { useI18n } from '../contexts/I18nContext';
 import { SendIcon } from './icons/Icon';
 import { UserCircleIcon } from './icons/Icon';
@@ -33,14 +33,14 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ context, onBack }) => {
     useEffect(scrollToBottom, [messages]);
     
     const handleSend = async () => {
-        if (!input.trim()) return;
+        if (!input.trim() || !user) return;
         
         const userMessage: Message = { sender: 'user', text: input };
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
 
-        const cloneResponse = await chatWithClone(input, context);
+        const cloneResponse = await chatWithClone(input, context, user.id);
 
         const cloneMessage: Message = { sender: 'clone', text: cloneResponse };
         setMessages(prev => [...prev, cloneMessage]);

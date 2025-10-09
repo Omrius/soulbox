@@ -320,6 +320,8 @@
   "voiceClone": {
     "title": "Voice Clone",
     "subheadline": "Train a version of your voice for more personal and immersive interactions.",
+    "maintenanceTitle": "Feature Under Maintenance",
+    "maintenanceDesc": "To ensure the security of your data, we are currently upgrading our voice cloning service. This feature will be back soon, more robust than ever.",
     "step1Title": "Step 1: Record your voice",
     "step1Desc": "Record 3 to 5 short samples of your voice reading a text. Speak naturally.",
     "startRecording": "Click to record",

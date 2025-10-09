@@ -320,6 +320,8 @@
   "voiceClone": {
     "title": "Clone Vocal",
     "subheadline": "Entraînez une version de votre voix pour des interactions plus personnelles et immersives.",
+    "maintenanceTitle": "Fonctionnalité en cours de maintenance",
+    "maintenanceDesc": "Pour garantir la sécurité de vos données, nous mettons à jour notre service de clonage vocal. Cette fonctionnalité sera bientôt de retour, plus robuste que jamais.",
     "step1Title": "Étape 1: Enregistrez votre voix",
     "step1Desc": "Enregistrez 3 à 5 courts échantillons de votre voix lisant un texte. Parlez naturellement.",
     "startRecording": "Cliquez pour enregistrer",

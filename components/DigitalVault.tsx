@@ -1,6 +1,7 @@
 // components/DigitalVault.tsx
 import React, { useState, useEffect } from 'react';
-import { fetchSealedItems, createSealedItem, generateInspiration } from '../services/geminiService';
+import { fetchSealedItems, createSealedItem } from '../services/geminiService';
+import { generateInspiration } from '../services/aiService'; // UPDATED
 import { useI18n } from '../contexts/I18nContext';
 import { SealedItem, Guardian } from '../types';
 import { PlusIcon, SparklesIcon, LockIcon, FileTextIcon, UsersIcon, ShieldCheckIcon } from './icons/Icon';
@@ -122,7 +123,7 @@ const AddItemModal: React.FC<{ onClose: () => void; onSave: (data: any) => void 
     const handleGenerate = async () => {
         if (!topic) return;
         setIsGenerating(true);
-        const inspiration = await generateInspiration(topic);
+        const inspiration = await generateInspiration(topic); // UPDATED
         setPayload(inspiration);
         setIsGenerating(false);
     };

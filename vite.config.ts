@@ -5,15 +5,11 @@ import { cwd } from 'node:process';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Charge les variables d'environnement du répertoire en fonction du 'mode' (development, production).
-  // Le troisième paramètre '' permet de charger toutes les variables, même sans le préfixe VITE_.
-  const env = loadEnv(mode, cwd(), '');
-  
+  // This configuration is now simplified.
+  // We no longer need to expose any secret keys to the frontend.
+  // The serverless function will read its key directly from the hosting environment variables.
   return {
     plugins: [react()],
-    define: {
-      // Expose uniquement la variable API_KEY à l'application de manière sécurisée.
-      'process.env.API_KEY': JSON.stringify(env.API_KEY)
-    }
+    // The 'define' block for process.env.API_KEY has been removed.
   }
 })

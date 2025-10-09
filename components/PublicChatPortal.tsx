@@ -2,8 +2,9 @@
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useI18n } from '../contexts/I18nContext';
-import { ConsulteurUser, ProcheDashboardView, SealedItem, UnlockAttempt } from '../types';
-import { chatWithPublicClone, fetchSealedItems } from '../services/geminiService';
+import { ConsulteurUser, ProcheDashboardView, SealedItem, UnlockAttempt, TrainingData } from '../types';
+import { chatWithClone } from '../services/aiService'; // UPDATED
+import { fetchSealedItems, fetchTrainingData } from '../services/geminiService';
 import { verifySecretAccess } from '../services/authService';
 import { SendIcon, UserCircleIcon, LockIcon, MessageIcon, ShieldCheckIcon, SettingsIcon, UploadCloudIcon, LogoutIcon, MenuIcon } from './icons/Icon';
 
@@ -64,23 +65,29 @@ const ProcheChat: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [cloneContext, setCloneContext] = useState<TrainingData | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         setMessages([{ sender: 'clone', text: t('procheDashboard.chatWelcome', { name: consulteurUser.cloneName }) }]);
-    }, [consulteurUser.cloneName, t]);
+        const loadContext = async () => {
+            const context = await fetchTrainingData(consulteurUser.cloneId);
+            setCloneContext(context);
+        };
+        loadContext();
+    }, [consulteurUser.cloneName, consulteurUser.cloneId, t]);
     
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
     
     const handleSend = async () => {
-        if (!input.trim() || !consulteurUser.cloneId) return;
+        if (!input.trim() || !cloneContext) return;
         const userMessage: Message = { sender: 'user', text: input };
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
-        const cloneResponse = await chatWithPublicClone(input, consulteurUser.cloneId);
+        const cloneResponse = await chatWithClone(input, cloneContext, consulteurUser.cloneId);
         const cloneMessage: Message = { sender: 'clone', text: cloneResponse };
         setMessages(prev => [...prev, cloneMessage]);
         setIsLoading(false);
@@ -116,9 +123,9 @@ const ProcheChat: React.FC = () => {
                     onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSend()}
                     placeholder={t('procheDashboard.chatPlaceholder', { name: consulteurUser.cloneName })}
                     className="chat-input form-input"
-                    disabled={isLoading}
+                    disabled={isLoading || !cloneContext}
                 />
-                <button onClick={handleSend} disabled={isLoading} className="chat-send-btn">
+                <button onClick={handleSend} disabled={isLoading || !cloneContext} className="chat-send-btn">
                     <SendIcon/>
                 </button>
             </div>

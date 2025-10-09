@@ -1,7 +1,15 @@
 // components/TrainingCenter.tsx
 import React, { useState, useEffect } from 'react';
 import { TrainingData, TrainingDocument, DashboardView, PersonalityQuizQuestion } from '../types';
-import { fetchTrainingData, saveTrainingData, fetchTrainingDocuments, uploadTrainingDocument, deleteTrainingDocument, chatWithClone, saveTrainingToDrive } from '../services/geminiService';
+import { 
+    fetchTrainingData, 
+    saveTrainingData,
+    fetchTrainingDocuments,
+    uploadTrainingDocument,
+    deleteTrainingDocument,
+    saveTrainingToDrive
+} from '../services/geminiService';
+import { chatWithClone } from '../services/aiService'; // UPDATED
 import { useI18n } from '../contexts/I18nContext';
 import ChatWindow from './ChatWindow';
 import { UploadCloudIcon, TrashIcon, PlusIcon } from './icons/Icon';

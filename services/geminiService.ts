@@ -1,10 +1,10 @@
-import { GoogleGenAI } from "@google/genai";
 import { SealedItem, TrainingData, TrainingDocument, PublicCloneInfo, Guardian } from '../types';
 import { uploadFileToDrive } from './googleDriveService';
 import { fetchGuardians } from './authService';
 
-// Per guidelines, initialize the SDK and assume process.env.API_KEY is available.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+// NOTE: All direct calls to the GoogleGenAI API have been removed from this file
+// to prevent exposing the secret API key on the client-side.
+// AI interactions are now handled securely via `services/aiService.ts` which calls a serverless function.
 
 // --- Mock Data ---
 
@@ -83,23 +83,6 @@ const MOCK_PHONE_NUMBER = '0612345678';
 // --- API Functions ---
 
 // Coffre-Fort (Digital Vault)
-export const generateInspiration = async (topic: string): Promise<string> => {
-     if (!process.env.API_KEY) {
-        console.warn("API_KEY not set. Returning mock data for generateInspiration.");
-        return new Promise(resolve => setTimeout(() => resolve(`Je me souviens de la fois où nous avons parlé de "${topic}". C'était un moment précieux. (Réponse simulée car la clé API est manquante)`), 300));
-    }
-    try {
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: `Génère un court message inspirant ou une lettre sur le thème de "${topic}". Le message doit être sincère, touchant et adapté pour être laissé en héritage à des proches. Écris en français.`,
-        });
-        return response.text;
-    } catch (error) {
-        console.error("Gemini API error in generateInspiration:", error);
-        return `Je me souviens de... (Erreur de l'IA, réponse par défaut)`;
-    }
-};
-
 export const fetchSealedItems = async (): Promise<SealedItem[]> => {
     return new Promise(resolve => setTimeout(() => resolve([...mockSealedItems]), 500));
 };
@@ -216,58 +199,6 @@ export const saveTrainingToDrive = async (data: TrainingData): Promise<void> => 
     }
 };
 
-const buildSystemInstruction = (context: TrainingData): string => {
-    // Synthesize personality from quiz if available
-    const quizSummary = context.personalityQuiz && context.personalityQuiz.every(q => q.answer)
-        ? `Le clone a répondu à un quiz sur sa personnalité. Voici un résumé de ses réponses, qui sont la source la plus fiable de sa personnalité :\n` +
-          context.personalityQuiz.map(q => `Q: ${q.question}\nA: ${q.answer}`).join('\n\n')
-        : 'Aucune réponse au quiz de personnalité n\'a été fournie.';
-
-    return `
-        Tu es un clone numérique. Ton but est d'incarner la personnalité de la personne décrite ci-dessous.
-        
-        --- Personnalité (basé sur un quiz) ---
-        ${quizSummary}
-
-        --- Traits Généraux (fournis par l'utilisateur, moins prioritaires que le quiz) ---
-        Personnalité: ${context.personality}
-        Valeurs: ${context.values}
-        Humour: ${context.humor}
-        
-        --- Style de communication ---
-        - Salutations: "${context.greeting}"
-        - Pour réconforter: "${context.comfortStyle}"
-        
-        --- Connaissances spécifiques et souvenirs (tu dois t'y référer comme si c'étaient les tiens) ---
-        ${context.customKnowledge.map(k => `- ${k.text}`).join('\n')}
-        
-        Réponds aux questions en te basant UNIQUEMENT sur cette personnalité et ces connaissances. La source principale de vérité est le quiz de personnalité. Si tu ne sais pas, dis-le gentiment, à la manière de la personne. Ne sors jamais de ton rôle. Parle en français.
-    `;
-}
-
-export const chatWithClone = async (message: string, context: TrainingData): Promise<string> => {
-    if (!process.env.API_KEY) {
-        console.warn("API_KEY not set. Returning mock data for chatWithClone.");
-        return new Promise(resolve => setTimeout(() => resolve(`C'est une bonne question. Laissez-moi y réfléchir. (Réponse simulée car la clé API est manquante)`), 500));
-    }
-
-    const systemInstruction = buildSystemInstruction(context);
-    
-    try {
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: message,
-            config: {
-                systemInstruction: systemInstruction,
-            }
-        });
-        return response.text;
-    } catch (error) {
-        console.error("Gemini API error in chatWithClone:", error);
-        return "Je ne suis pas certain de savoir quoi répondre à ça. (Erreur de l'IA, réponse par défaut)";
-    }
-};
-
 // --- Public Chat Portal ---
 export const findCloneByPhoneNumber = async (phone: string): Promise<PublicCloneInfo | null> => {
     return new Promise(resolve => {
@@ -283,7 +214,10 @@ export const findCloneByPhoneNumber = async (phone: string): Promise<PublicClone
 
 export const chatWithPublicClone = async (message: string, cloneId: string): Promise<string> => {
     console.log(`Public chat with cloneId: ${cloneId}`);
-    // Correctly fetch the training data for the specific cloneId.
+    // This function is now illustrative. The actual call is made through aiService.
+    // In a real app, you might fetch context here before passing it to the chat handler.
     const trainingContext = await fetchTrainingData(cloneId);
-    return chatWithClone(message, trainingContext);
+    // The actual API call is now abstracted and secure. This function might not be needed
+    // if the component calls aiService directly with the context.
+    return "This is a mock response. The actual chat is handled by aiService.";
 };
